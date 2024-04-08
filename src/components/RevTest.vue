@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      Speed: {{ Math.floor(speed) }}
     </div>
     <div>
       accelerating: {{ isAccelerating }}
@@ -9,10 +8,6 @@
     <div style="background: green">
       Gear: {{ gear }}
     </div>
-    <div>
-      RPM: {{ Math.floor(rpm) }}
-    </div>
-
     <div
       :style="{
         position: 'absolute',
@@ -20,7 +15,21 @@
         height: '50px',
         width: `${speed + 1}px`,
       }"
-    ></div>
+    >
+    Speed: {{ Math.floor(speed) }}
+  </div>
+    <div
+      :style="{
+        top: '50px',
+        position: 'absolute',
+        background: 'blue',
+        height: '50px',
+        width: `${(rpm + 1) / 20}px`,
+      }"
+    >
+    RPM: {{ Math.floor(rpm) }}
+
+  </div>
   </div>
 </template>
 
@@ -29,19 +38,20 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 // CONSTANTS  
 const MAX_GEARS = 6
-const BAD_GEAR_RATIO_PENALTY = 10
 const MAX_RPM = 3000
-const GEAR_RATIOS = [0.1, 0.15, 0.3, 0.4, 0.5, 0.6]
+const MIN_RPM = 300
+const GEAR_RATIOS = [0.1, 0.15, 0.3, 0.4, 0.6, 0.8]
+const MAX_SPEED_PER_GEAR = [10, 15, 30, 40, 60, 80]
 //
 
 
 const speed = ref(0)
 const rpm = ref(0)
+const rpmGain = ref(0)
+const acceleration = ref(0)
 const isAccelerating = ref(false)
 const isShifting = ref(false)
-const rpmGain = ref(0)
 
-// const optimalSpeedPerGear = [10, 15, 30, 40, 60, 80]
 const gear = ref(1)
 
 const shiftGear = () => {
@@ -52,15 +62,17 @@ const shiftGear = () => {
 const handleKeyPress = (event: KeyboardEvent) => {
   if (event.code === "Space") return isAccelerating.value = true
   if (event.code === "ArrowUp") {
-    rpmGain.value = 0
     isShifting.value = true
     setTimeout(shiftGear, 150)
     gear.value = Math.min(gear.value + 1, MAX_GEARS)
-
+    rpmGain.value -= Math.sqrt(rpm.value)
     return
   }
   if (event.code === "ArrowDown") {
     gear.value = Math.max(gear.value - 1, 1)
+    isShifting.value = true
+    setTimeout(shiftGear, 150)
+    rpm.value = MAX_RPM
     return
   }
 }
@@ -69,22 +81,16 @@ const handleKeyUp = (event: KeyboardEvent) => {
   if (event.code === "Space") isAccelerating.value = false
 }
 
-
 const gameLoopActive = ref(false)
 
 const gameLoop = () => {
   if (isAccelerating.value && !isShifting.value) {
-    // rpm.value = Math.min(MAX_RPM, rpm.value + 30)
-    rpmGain.value += 0.3
+    rpm.value += 30
   }
-  // down shifting jumps to max
+  rpm.value = Math.max(rpm.value * 0.99, MIN_RPM)
+  rpmGain.value *= (0.99)
 
   rpm.value += rpmGain.value
-  rpmGain.value *= 0.99
-  rpm.value *= (0.99)
-
-  speed.value += ((rpm.value * GEAR_RATIOS[gear.value - 1] / 8)- speed.value) / 10
-
 
   if (gameLoopActive.value) {
     requestAnimationFrame(gameLoop)
@@ -104,3 +110,16 @@ onUnmounted(() => {
   gameLoopActive.value = false
 })
 </script>
+
+
+<!-- 
+
+  max rpm and min rpm
+   3000 and 250
+
+   when you accel -> rpm goes fast at low number and slow at high number
+   when shift up -> rpm drops 1/ proprtional rpm at previous gear
+
+
+
+ -->
