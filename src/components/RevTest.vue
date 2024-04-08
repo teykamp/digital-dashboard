@@ -2,7 +2,12 @@
   <div>
     <div>
       Speed: {{ Math.floor(speed) }}
-      {{ gear }}
+    </div>
+    <div>
+      accelerating: {{ isAccelerating }}
+    </div>
+    <div style="background: green">
+      Gear: {{ gear }}
     </div>
     <div>
       RPM: {{ Math.floor(rpm) }}
@@ -21,37 +26,40 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-// 
+
+// CONSTANTS  
 const MAX_GEARS = 6
 const BAD_GEAR_RATIO_PENALTY = 10
-const MAX_RPM = 3004 // not sure why 4 is significant (rounds it to 3000)
-// 
+const MAX_RPM = 3000
+const GEAR_RATIOS = [0.1, 0.15, 0.3, 0.4, 0.5, 0.6]
+//
+
+
 const speed = ref(0)
 const rpm = ref(0)
 const isAccelerating = ref(false)
+const isShifting = ref(false)
+const rpmGain = ref(0)
 
-const speedMultiplierPerGear = [0.2, 0.3, 0.4, 0.5, 0.7, 0.9]
-const optimalSpeedPerGear = [10, 15, 30, 40, 60, 80]
+// const optimalSpeedPerGear = [10, 15, 30, 40, 60, 80]
 const gear = ref(1)
 
-const transmission = ref(1)
-
 const shiftGear = () => {
-  transmission.value = 1
+  isShifting.value = false
 }
 
 
 const handleKeyPress = (event: KeyboardEvent) => {
   if (event.code === "Space") return isAccelerating.value = true
   if (event.code === "ArrowUp") {
-    transmission.value = 0
-    rpm.value = rpm.value / 4
+    rpmGain.value = 0
+    isShifting.value = true
     setTimeout(shiftGear, 150)
     gear.value = Math.min(gear.value + 1, MAX_GEARS)
+
     return
   }
   if (event.code === "ArrowDown") {
-    rpm.value *= 2
     gear.value = Math.max(gear.value - 1, 1)
     return
   }
@@ -65,15 +73,17 @@ const handleKeyUp = (event: KeyboardEvent) => {
 const gameLoopActive = ref(false)
 
 const gameLoop = () => {
-  const x = 1-(Math.abs((speed.value - optimalSpeedPerGear[gear.value - 1]) === 0 ? 1 : (speed.value - optimalSpeedPerGear[gear.value - 1]) / optimalSpeedPerGear[gear.value - 1]) / 30)
-
-  if (isAccelerating.value) {
-    rpm.value = Math.min(MAX_RPM, rpm.value + 20)
-    speed.value = speed.value + 1 * transmission.value * ( x > 1 ? 1: x ) * speedMultiplierPerGear[gear.value - 1]
+  if (isAccelerating.value && !isShifting.value) {
+    // rpm.value = Math.min(MAX_RPM, rpm.value + 30)
+    rpmGain.value += 0.3
   }
-  
-  speed.value *= (0.99)
-  rpm.value *= (0.999)
+  // down shifting jumps to max
+
+  rpm.value += rpmGain.value
+  rpmGain.value *= 0.99
+  rpm.value *= (0.99)
+
+  speed.value += ((rpm.value * GEAR_RATIOS[gear.value - 1] / 8)- speed.value) / 10
 
 
   if (gameLoopActive.value) {
