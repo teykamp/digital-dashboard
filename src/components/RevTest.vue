@@ -72,7 +72,7 @@ const handleKeyPress = (event: KeyboardEvent) => {
     gear.value = Math.max(gear.value - 1, 1)
     isShifting.value = true
     setTimeout(shiftGear, 150)
-    rpm.value = MAX_RPM
+    rpm.value += Math.sqrt(rpm.value) * 40
     return
   }
 }
@@ -87,7 +87,11 @@ const gameLoop = () => {
   if (isAccelerating.value && !isShifting.value) {
     rpm.value += 30
   }
+
+  if (rpm.value > MAX_RPM) rpm.value *= 0.95
   rpm.value = Math.max(rpm.value * 0.99, MIN_RPM)
+  
+  // rpm.value = Math.min(rpm.value, MIN_RPM)
   rpmGain.value *= (0.99)
 
   rpm.value += rpmGain.value
