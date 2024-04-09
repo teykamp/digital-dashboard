@@ -29,6 +29,10 @@
     >
     RPM: {{ Math.floor(rpm) }}
 
+    <img v-if="rpm>801" src="../assets/icon1.svg" alt="">
+    <img v-else src="../assets/icon2.svg" alt="">
+
+
   </div>
   </div>
 </template>
