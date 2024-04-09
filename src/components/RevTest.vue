@@ -38,8 +38,8 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 // CONSTANTS  
 const MAX_GEARS = 6
-const MAX_RPM = 3000
-const MIN_RPM = 300
+const MAX_RPM = 8000
+const MIN_RPM = 800
 const GEAR_RATIOS = [0.1, 0.15, 0.3, 0.4, 0.6, 0.8]
 const MAX_SPEED_PER_GEAR = [10, 15, 30, 40, 60, 80]
 //
@@ -85,11 +85,11 @@ const gameLoopActive = ref(false)
 
 const gameLoop = () => {
   if (isAccelerating.value && !isShifting.value) {
-    rpm.value += 30
+    rpm.value += 85
   }
 
   if (rpm.value > MAX_RPM) rpm.value *= 0.95
-  rpm.value = Math.max(rpm.value * 0.99, MIN_RPM)
+  rpm.value = Math.max(rpm.value * .99, MIN_RPM)
   
   // rpm.value = Math.min(rpm.value, MIN_RPM)
   rpmGain.value *= (0.99)
