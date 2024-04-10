@@ -30,10 +30,22 @@
     RPM: {{ Math.floor(rpm) }}
 
   </div>
+
+    <div>
+      <div style="transform: skew(-10deg)">
+        <SegmentDisplay 
+          :display-number="1"
+          :car-type="'S2000'"
+          :color="'red'"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import SegmentDisplay from './SegmentDisplay.vue'
+
 import { ref, onMounted, onUnmounted } from 'vue'
 
 // CONSTANTS  
