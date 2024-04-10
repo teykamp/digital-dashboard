@@ -30,11 +30,26 @@
     RPM: {{ Math.floor(rpm) }}
 
   </div>
+    <div 
+      v-for="index in 4"
+      :style="{
+          transform: 'skew(-10deg)',
+          'padding-left': `${(index - 1) * 75}px`
+        }"
+    >
+      <SegmentDisplay 
+        :display-number="computeDigits[index - 1]"
+        :car-type="'S2000'"
+        :color="'red'"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import SegmentDisplay from './SegmentDisplay.vue'
+
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 // CONSTANTS  
 const MAX_GEARS = 6
@@ -51,6 +66,13 @@ const rpmGain = ref(0)
 const acceleration = ref(0)
 const isAccelerating = ref(false)
 const isShifting = ref(false)
+
+const computeDigits = computed(() => [
+  (Math.floor((rpm.value / 1000) % 10)) || 0,
+  (Math.floor((rpm.value / 100) % 10)) || 0,
+  (Math.floor((rpm.value / 10) % 10)) || 0,
+  (Math.floor((rpm.value) % 10)) || 0,
+  ])
 
 const gear = ref(1)
 
