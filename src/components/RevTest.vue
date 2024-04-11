@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <!-- <div>
     </div>
     <div>
       accelerating: {{ isAccelerating }}
@@ -29,9 +29,9 @@
     >
     RPM: {{ Math.floor(rpm) }}
 
-  </div>
+  </div> -->
     <div 
-      v-for="index in 4"
+      v-for="index in 3"
       :style="{
           transform: 'skew(-10deg)',
           'padding-left': `${(index - 1) * 75}px`
@@ -68,10 +68,9 @@ const isAccelerating = ref(false)
 const isShifting = ref(false)
 
 const computeDigits = computed(() => [
-  (Math.floor((rpm.value / 1000) % 10)) || 0,
-  (Math.floor((rpm.value / 100) % 10)) || 0,
-  (Math.floor((rpm.value / 10) % 10)) || 0,
-  (Math.floor((rpm.value) % 10)) || 0,
+  (Math.floor((speed.value / 100) % 10)) || 0,
+  (Math.floor((speed.value / 10) % 10)) || 0,
+  (Math.floor((speed.value) % 10)) || 0,
   ])
 
 const gear = ref(1)
@@ -108,7 +107,8 @@ const gameLoopActive = ref(false)
 const gameLoop = () => {
   if (isAccelerating.value && !isShifting.value) {
     rpm.value += 85
-  }
+    speed.value += 2 * GEAR_RATIOS[gear.value - 1]
+  }    
 
   if (rpm.value > MAX_RPM) rpm.value *= 0.95
   rpm.value = Math.max(rpm.value * .99, MIN_RPM)
@@ -117,6 +117,8 @@ const gameLoop = () => {
   rpmGain.value *= (0.99)
 
   rpm.value += rpmGain.value
+
+  speed.value *= (0.99)
 
   if (gameLoopActive.value) {
     requestAnimationFrame(gameLoop)
