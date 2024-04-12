@@ -1,28 +1,31 @@
 <template>
-  <div
-    :style="{
-      // transform: 'skew(-10deg)',
-      background: '#110000',
-      height: `${DIGIT_HEIGHT}px`,
-      width: `${TOTAL_WIDTH}px`,
-      padding: '20px',
-    }"
-  >
-    <div 
-      v-for="index in 3"
+  <div>
+    <div
       :style="{
-          'padding-left': `${(index - 1) * (DIDGIT_WIDTH + SEGMENT_SPACING)}px`,
-        }"
+        // transform: 'skew(-10deg)',
+        background: '#110000',
+        height: `${DIGIT_HEIGHT}px`,
+        width: `${TOTAL_WIDTH}px`,
+        padding: '20px',
+      }"
     >
-      <SegmentDisplay 
-        :display-number="computeDigits(speed)[index - 1]"
-        :car-type="'S2000'"
-        :color="'#FC1E3E'"
-        :dimensions="{
-          width: SEGMENT_WIDTH,
-          height: SEGMENT_HEIGHT
-        }"
-      />
+      <div 
+        v-for="index in 3"
+        :style="{
+            'padding-left': `${(index - 1) * (DIDGIT_WIDTH + SEGMENT_SPACING)}px`,
+          }"
+      >
+        <SegmentDisplay 
+          :display-number="computeDigits(speed, true)[index - 1]"
+          :car-type="'S2000'"
+          :color="'#FC1E3E'"
+          :show-off-segments="false"
+          :dimensions="{
+            width: SEGMENT_WIDTH,
+            height: SEGMENT_HEIGHT
+          }"
+        />
+      </div>
     </div>
   </div>
 </template>

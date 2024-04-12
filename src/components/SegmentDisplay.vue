@@ -4,20 +4,24 @@
     style="position: relative;"
   >
     <Segment
-      v-if="segmentListS2000.numbers[displayNumber][index]"
-      :segmentStyle="segment"
-      style="position: absolute;"
+      :segmentStyle="{
+        ...computeSegmentColor(!!segmentListS2000.numbers[displayNumber][index]),
+        ...segment, 
+        position: 'absolute',
+      }"
     />
   </div>
 </template>
 
 <script setup lang='ts'>
 import Segment from './Segment.vue'
+import hexToRGBA from '../functions/useHexToRGBA'
 
 const props = defineProps<{
   displayNumber: number,
   carType: string,
   color: string,
+  showOffSegments: boolean,
   dimensions: {
     // imagine vertical segment: |
     width: number,
@@ -25,6 +29,18 @@ const props = defineProps<{
   }
 }>()
 
+const dimmedColor = hexToRGBA(props.color, 0.075)
+
+const computeSegmentColor = (displayCondition: boolean) => {
+  return {
+    background:  displayCondition 
+      ? props.color 
+      : (props.showOffSegments ? dimmedColor : 'rgba(0, 0, 0, 0)'),
+    'box-shadow': displayCondition 
+      ? '0px 0px 20px red' 
+      : '',
+  }
+}
 
 const segmentListS2000 = {
   numbers: [
@@ -38,28 +54,23 @@ const segmentListS2000 = {
     [1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ],
   segments: [
     // top left
-    {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
+    {   
       'border-radius': '15px 0 0 0',
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
     },
     // top
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.height}px`, 
       left: `${props.dimensions.width + 1}px`,
     },
     // top right
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       'border-radius': '0 15px 0 0',
       height: `${props.dimensions.width}px`,
@@ -67,16 +78,12 @@ const segmentListS2000 = {
     },
     // top left vertical
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       top: `${props.dimensions.width + 1}px`,
       height: `${props.dimensions.height - props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
     },
     // top right vertical
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       top: `${props.dimensions.width + 1}px`,
       height: `${props.dimensions.height - props.dimensions.width}px`,
@@ -86,14 +93,10 @@ const segmentListS2000 = {
     {
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       top: `${props.dimensions.height + 2}px`,
     },
     // middle
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       top: `${props.dimensions.height + 2}px`,
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.height}px`,
@@ -101,8 +104,6 @@ const segmentListS2000 = {
     },
     // middle right
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       top: `${props.dimensions.height + 2}px`,
       height: `${props.dimensions.width}px`,
@@ -110,16 +111,12 @@ const segmentListS2000 = {
     },
     // bottom left vertical
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       top: `${props.dimensions.width + props.dimensions.height + 3}px`,
       height: `${props.dimensions.height - props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
     },
     // bottom right vertical
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       top: `${props.dimensions.width + props.dimensions.height + 3}px`,
       height: `${props.dimensions.height - props.dimensions.width}px`,
@@ -127,8 +124,6 @@ const segmentListS2000 = {
     },
     // bottom left
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       top: `${props.dimensions.height * 2 + 4}px`,
       'border-radius': '0 0 0 15px',
       height: `${props.dimensions.width}px`,
@@ -136,8 +131,6 @@ const segmentListS2000 = {
     },
     // bottom
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       top: `${props.dimensions.height * 2 + 4}px`,
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.height}px`,
@@ -145,8 +138,6 @@ const segmentListS2000 = {
     },
     // bottom right
     {
-      'box-shadow': '0px 0px 20px red',
-      background: props.color,
       left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       'border-radius': '0 0 15px 0',
       top: `${props.dimensions.height * 2 + 4}px`,
