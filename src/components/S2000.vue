@@ -1,10 +1,13 @@
 <template>
+  <!-- S2K GAUGES -->
   <div>
     <img src="../assets/s2k.svg" alt=""
     height="400rem">
     
   </div>
+  <!--  -->
 
+  <!-- SPEEDOMETER -->
   <div>
     <div
       :style="{
@@ -24,7 +27,7 @@
       <div 
         v-for="index in 3"
         :style="{
-            'padding-left': `${(index - 1) * (DIDGIT_WIDTH + SEGMENT_SPACING)}px`,
+            'padding-left': `${(index - 1) * (DIGIT_WIDTH + SEGMENT_SPACING)}px`,
           }"
       >
         <SegmentDisplay
@@ -40,6 +43,25 @@
       </div>
     </div>
   </div>
+  <!--  -->
+
+  <!-- TACHOMETER -->
+  <div>
+    </div>
+    <div
+      :style="{
+        position: 'absolute',
+        background: 'orange',
+        height: '100px',
+        width: `${(rpm + 1) / 20}px`,
+        rotate: '-45deg',
+        top: '330px',
+        left: '140px',
+        zIndex: '0'
+      }"
+    >
+  </div>
+  <!--  -->
 </template>
 
 <script setup lang="ts">
@@ -48,15 +70,16 @@ import computeDigits from '../functions/useComputeDigits'
 import useEngineController from '../composables/useEngineController'
 
 const { speed } = useEngineController()
+const { rpm } = useEngineController()
 
 const SEGMENT_HEIGHT = 35
 const SEGMENT_WIDTH = 10
 const SEGMENT_SPACING = 20
 
 const DIGIT_HEIGHT = SEGMENT_HEIGHT * 2 + SEGMENT_WIDTH + 4
-const DIDGIT_WIDTH = SEGMENT_WIDTH * 2 + SEGMENT_HEIGHT + 1
+const DIGIT_WIDTH = SEGMENT_WIDTH * 2 + SEGMENT_HEIGHT + 1
 
-const TOTAL_WIDTH = DIDGIT_WIDTH * 3 + 1 + SEGMENT_SPACING * 2
+const TOTAL_WIDTH = DIGIT_WIDTH * 3 + 1 + SEGMENT_SPACING * 2
 
 </script>
 
