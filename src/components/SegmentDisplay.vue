@@ -44,7 +44,6 @@ const segmentListS2000 = {
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `-${props.dimensions.width + 1}px`,
       'border-radius': '15px 0 0 0',
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
@@ -54,14 +53,14 @@ const segmentListS2000 = {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
       height: `${props.dimensions.width}px`,
-      width: `${props.dimensions.height}px`,
-
+      width: `${props.dimensions.height}px`, 
+      left: `${props.dimensions.width + 1}px`,
     },
     // top right
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${props.dimensions.height + 1}px`,
+      left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       'border-radius': '0 15px 0 0',
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
@@ -70,7 +69,6 @@ const segmentListS2000 = {
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `-${props.dimensions.width + 1}px`,
       top: `${props.dimensions.width + 1}px`,
       height: `${props.dimensions.height - props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
@@ -79,7 +77,7 @@ const segmentListS2000 = {
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${props.dimensions.height + 1}px`,
+      left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       top: `${props.dimensions.width + 1}px`,
       height: `${props.dimensions.height - props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
@@ -91,7 +89,6 @@ const segmentListS2000 = {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
       top: `${props.dimensions.height + 2}px`,
-      left: `-${props.dimensions.width + 1}px`,
     },
     // middle
     {
@@ -100,12 +97,13 @@ const segmentListS2000 = {
       top: `${props.dimensions.height + 2}px`,
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.height}px`,
+      left: `${props.dimensions.width + 1}px`,
     },
     // middle right
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${props.dimensions.height + 1}px`,
+      left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       top: `${props.dimensions.height + 2}px`,
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
@@ -114,7 +112,6 @@ const segmentListS2000 = {
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `-${props.dimensions.width + 1}px`,
       top: `${props.dimensions.width + props.dimensions.height + 3}px`,
       height: `${props.dimensions.height - props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
@@ -123,7 +120,7 @@ const segmentListS2000 = {
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${props.dimensions.height + 1}px`,
+      left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       top: `${props.dimensions.width + props.dimensions.height + 3}px`,
       height: `${props.dimensions.height - props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
@@ -133,7 +130,6 @@ const segmentListS2000 = {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
       top: `${props.dimensions.height * 2 + 4}px`,
-      left: `-${props.dimensions.width + 1}px`,
       'border-radius': '0 0 0 15px',
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.width}px`,
@@ -145,12 +141,13 @@ const segmentListS2000 = {
       top: `${props.dimensions.height * 2 + 4}px`,
       height: `${props.dimensions.width}px`,
       width: `${props.dimensions.height}px`,
+      left: `${props.dimensions.width + 1}px`,
     },
     // bottom right
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${props.dimensions.height + 1}px`,
+      left: `${props.dimensions.width + props.dimensions.height + 2}px`,
       'border-radius': '0 0 15px 0',
       top: `${props.dimensions.height * 2 + 4}px`,
       height: `${props.dimensions.width}px`,
