@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dseg": "^0.46.0",
     "vue": "^3.4.21"
   },
   "devDependencies": {
