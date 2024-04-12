@@ -18,11 +18,13 @@ const props = defineProps<{
   displayNumber: number,
   carType: string,
   color: string,
+  dimensions: {
+    // imagine vertical segment: |
+    width: number,
+    height: number
+  }
 }>()
 
-// imagine vertical segment: |
-const SEGMENT_WIDTH = 10
-const SEGMENT_HEIGHT = 35
 
 const segmentListS2000 = {
   numbers: [
@@ -42,117 +44,117 @@ const segmentListS2000 = {
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `-${SEGMENT_WIDTH + 1}px`,
+      left: `-${props.dimensions.width + 1}px`,
       'border-radius': '15px 0 0 0',
-      height: `${SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      height: `${props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
     },
     // top
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      height: `${SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_HEIGHT}px`,
+      height: `${props.dimensions.width}px`,
+      width: `${props.dimensions.height}px`,
 
     },
     // top right
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${SEGMENT_HEIGHT + 1}px`,
+      left: `${props.dimensions.height + 1}px`,
       'border-radius': '0 15px 0 0',
-      height: `${SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      height: `${props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
     },
     // top left vertical
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `-${SEGMENT_WIDTH + 1}px`,
-      top: `${SEGMENT_WIDTH + 1}px`,
-      height: `${SEGMENT_HEIGHT - SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      left: `-${props.dimensions.width + 1}px`,
+      top: `${props.dimensions.width + 1}px`,
+      height: `${props.dimensions.height - props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
     },
     // top right vertical
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${SEGMENT_HEIGHT + 1}px`,
-      top: `${SEGMENT_WIDTH + 1}px`,
-      height: `${SEGMENT_HEIGHT - SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      left: `${props.dimensions.height + 1}px`,
+      top: `${props.dimensions.width + 1}px`,
+      height: `${props.dimensions.height - props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
     },
     // middle left
     {
-      height: `${SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      height: `${props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      top: `${SEGMENT_HEIGHT + 2}px`,
-      left: `-${SEGMENT_WIDTH + 1}px`,
+      top: `${props.dimensions.height + 2}px`,
+      left: `-${props.dimensions.width + 1}px`,
     },
     // middle
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      top: `${SEGMENT_HEIGHT + 2}px`,
-      height: `${SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_HEIGHT}px`,
+      top: `${props.dimensions.height + 2}px`,
+      height: `${props.dimensions.width}px`,
+      width: `${props.dimensions.height}px`,
     },
     // middle right
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${SEGMENT_HEIGHT + 1}px`,
-      top: `${SEGMENT_HEIGHT + 2}px`,
-      height: `${SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      left: `${props.dimensions.height + 1}px`,
+      top: `${props.dimensions.height + 2}px`,
+      height: `${props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
     },
     // bottom left vertical
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `-${SEGMENT_WIDTH + 1}px`,
-      top: `${SEGMENT_WIDTH + SEGMENT_HEIGHT + 3}px`,
-      height: `${SEGMENT_HEIGHT - SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      left: `-${props.dimensions.width + 1}px`,
+      top: `${props.dimensions.width + props.dimensions.height + 3}px`,
+      height: `${props.dimensions.height - props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
     },
     // bottom right vertical
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${SEGMENT_HEIGHT + 1}px`,
-      top: `${SEGMENT_WIDTH + SEGMENT_HEIGHT + 3}px`,
-      height: `${SEGMENT_HEIGHT - SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      left: `${props.dimensions.height + 1}px`,
+      top: `${props.dimensions.width + props.dimensions.height + 3}px`,
+      height: `${props.dimensions.height - props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
     },
     // bottom left
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      top: `${SEGMENT_HEIGHT * 2 + 4}px`,
-      left: `-${SEGMENT_WIDTH + 1}px`,
+      top: `${props.dimensions.height * 2 + 4}px`,
+      left: `-${props.dimensions.width + 1}px`,
       'border-radius': '0 0 0 15px',
-      height: `${SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      height: `${props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
     },
     // bottom
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      top: `${SEGMENT_HEIGHT * 2 + 4}px`,
-      height: `${SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_HEIGHT}px`,
+      top: `${props.dimensions.height * 2 + 4}px`,
+      height: `${props.dimensions.width}px`,
+      width: `${props.dimensions.height}px`,
     },
     // bottom right
     {
       'box-shadow': '0px 0px 20px red',
       background: props.color,
-      left: `${SEGMENT_HEIGHT + 1}px`,
+      left: `${props.dimensions.height + 1}px`,
       'border-radius': '0 0 15px 0',
-      top: `${SEGMENT_HEIGHT * 2 + 4}px`,
-      height: `${SEGMENT_WIDTH}px`,
-      width: `${SEGMENT_WIDTH}px`,
+      top: `${props.dimensions.height * 2 + 4}px`,
+      height: `${props.dimensions.width}px`,
+      width: `${props.dimensions.width}px`,
     },
   ],
 }

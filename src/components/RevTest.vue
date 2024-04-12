@@ -1,78 +1,56 @@
 <template>
   <div>
-    <!-- <div>
-    </div>
-    <div>
-      accelerating: {{ isAccelerating }}
-    </div>
-    <div style="background: green">
-      Gear: {{ gear }}
-    </div>
     <div
-      :style="{
-        position: 'absolute',
-        background: 'red',
-        height: '50px',
-        width: `${speed + 1}px`,
-      }"
+    :style="{
+            background: 'orange',
+            height: '84px',
+            width: '196px',
+            'padding-left': '11px',
+          }"
     >
-    Speed: {{ Math.floor(speed) }}
-  </div>
-    <div
-      :style="{
-        top: '50px',
-        position: 'absolute',
-        background: 'blue',
-        height: '50px',
-        width: `${(rpm + 1) / 20}px`,
-      }"
-    >
-    RPM: {{ Math.floor(rpm) }}
-
-  </div> -->
-    <div 
-      v-for="index in 3"
-      :style="{
-          transform: 'skew(-10deg)',
-          'padding-left': `${(index - 1) * 75}px`
-        }"
-    >
-      <SegmentDisplay 
-        :display-number="computeDigits[index - 1]"
-        :car-type="'S2000'"
-        :color="'red'"
-      />
+      <div 
+        v-for="index in 3"
+        :style="{
+            // transform: 'skew(-10deg)',
+            'padding-left': `${(index - 1) * 75}px`,
+            background: 'orange',
+      
+          }"
+      >
+        <SegmentDisplay 
+          :display-number="computeDigits(speed)[index - 1]"
+          :car-type="'S2000'"
+          :color="'red'"
+          :dimensions="{
+            width: SEGMENT_WIDTH,
+            height: SEGMENT_HEIGHT
+          }"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import SegmentDisplay from './SegmentDisplay.vue'
+import computeDigits from '../composables/useComputeDigits'
 
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 // CONSTANTS  
 const MAX_GEARS = 6
 const MAX_RPM = 8000
 const MIN_RPM = 800
 const GEAR_RATIOS = [0.1, 0.15, 0.3, 0.4, 0.6, 0.8]
-const MAX_SPEED_PER_GEAR = [10, 15, 30, 40, 60, 80]
+const SEGMENT_HEIGHT = 35
+const SEGMENT_WIDTH = 10
 //
-
 
 const speed = ref(0)
 const rpm = ref(0)
 const rpmGain = ref(0)
-const acceleration = ref(0)
 const isAccelerating = ref(false)
 const isShifting = ref(false)
-
-const computeDigits = computed(() => [
-  (Math.floor((speed.value / 100) % 10)) || 0,
-  (Math.floor((speed.value / 10) % 10)) || 0,
-  (Math.floor((speed.value) % 10)) || 0,
-  ])
-
 const gear = ref(1)
 
 const shiftGear = () => {
@@ -113,7 +91,6 @@ const gameLoop = () => {
   if (rpm.value > MAX_RPM) rpm.value *= 0.95
   rpm.value = Math.max(rpm.value * .99, MIN_RPM)
   
-  // rpm.value = Math.min(rpm.value, MIN_RPM)
   rpmGain.value *= (0.99)
 
   rpm.value += rpmGain.value
@@ -138,16 +115,3 @@ onUnmounted(() => {
   gameLoopActive.value = false
 })
 </script>
-
-
-<!-- 
-
-  max rpm and min rpm
-   3000 and 250
-
-   when you accel -> rpm goes fast at low number and slow at high number
-   when shift up -> rpm drops 1/ proprtional rpm at previous gear
-
-
-
- -->
