@@ -1,16 +1,17 @@
 <template>
   <div
     :style="{
+      // transform: 'skew(-10deg)',
       background: '#110000',
-      height: `${TOTAL_HEIGHT}px`,
-      width: `${(TOTAL_WIDTH) * 3 + SPACING_BETWEEN_SEGMENTS - 9}px`,
+      height: `${DIGIT_HEIGHT}px`,
+      width: `${TOTAL_WIDTH}px`,
+      padding: '20px',
     }"
   >
     <div 
       v-for="index in 3"
       :style="{
-          // transform: 'skew(-10deg)',
-          'padding-left': `${(index - 1) * SPACING_BETWEEN_SEGMENTS}px`,
+          'padding-left': `${(index - 1) * (DIDGIT_WIDTH + SEGMENT_SPACING)}px`,
         }"
     >
       <SegmentDisplay 
@@ -35,9 +36,11 @@ const { speed } = useEngineController()
 
 const SEGMENT_HEIGHT = 35
 const SEGMENT_WIDTH = 10
-const SPACING_BETWEEN_SEGMENTS = SEGMENT_HEIGHT + 2 * SEGMENT_WIDTH + 20
+const SEGMENT_SPACING = 20
 
-const TOTAL_HEIGHT = SEGMENT_HEIGHT * 2 + SEGMENT_WIDTH + 4
-const TOTAL_WIDTH = SEGMENT_WIDTH + SEGMENT_HEIGHT + 2
+const DIGIT_HEIGHT = SEGMENT_HEIGHT * 2 + SEGMENT_WIDTH + 4
+const DIDGIT_WIDTH = SEGMENT_WIDTH * 2 + SEGMENT_HEIGHT + 1
+
+const TOTAL_WIDTH = DIDGIT_WIDTH * 3 + 1 + SEGMENT_SPACING * 2
 
 </script>
