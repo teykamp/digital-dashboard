@@ -1,21 +1,36 @@
 <template>
+  <!-- S2K GAUGES -->
+  <div>
+    <img src="../assets/s2k.svg" alt=""
+    height="400rem">
+    
+  </div>
+  <!--  -->
+
+  <!-- SPEEDOMETER -->
   <div>
     <div
       :style="{
         // transform: 'skew(-10deg)',
         background: '#110000',
-        height: `${DIGIT_HEIGHT}px`,
-        width: `${TOTAL_WIDTH}px`,
-        padding: '20px',
+        // height: `${DIGIT_HEIGHT}px`,
+        // width: `${TOTAL_WIDTH}px`,
+        height: `90px`,
+        width: `260px`,
+        padding: '15px',
+        position: 'absolute',
+        top: '250px',
+        left: '528px',
+        zIndex: '0'
       }"
     >
       <div 
         v-for="index in 3"
         :style="{
-            'padding-left': `${(index - 1) * (DIDGIT_WIDTH + SEGMENT_SPACING)}px`,
+            'padding-left': `${(index - 1) * (DIGIT_WIDTH + SEGMENT_SPACING)}px`,
           }"
       >
-        <SegmentDisplay 
+        <SegmentDisplay
           :display-number="computeDigits(speed, true)[index - 1]"
           :car-type="'S2000'"
           :color="'#FC1E3E'"
@@ -28,6 +43,25 @@
       </div>
     </div>
   </div>
+  <!--  -->
+
+  <!-- TACHOMETER -->
+  <div>
+    </div>
+    <div
+      :style="{
+        position: 'absolute',
+        background: 'orange',
+        height: '100px',
+        width: `${(rpm + 1) / 20}px`,
+        rotate: '-45deg',
+        top: '330px',
+        left: '140px',
+        zIndex: '0'
+      }"
+    >
+  </div>
+  <!--  -->
 </template>
 
 <script setup lang="ts">
@@ -36,14 +70,22 @@ import computeDigits from '../functions/useComputeDigits'
 import useEngineController from '../composables/useEngineController'
 
 const { speed } = useEngineController()
+const { rpm } = useEngineController()
 
 const SEGMENT_HEIGHT = 35
 const SEGMENT_WIDTH = 10
 const SEGMENT_SPACING = 20
 
 const DIGIT_HEIGHT = SEGMENT_HEIGHT * 2 + SEGMENT_WIDTH + 4
-const DIDGIT_WIDTH = SEGMENT_WIDTH * 2 + SEGMENT_HEIGHT + 1
+const DIGIT_WIDTH = SEGMENT_WIDTH * 2 + SEGMENT_HEIGHT + 1
 
-const TOTAL_WIDTH = DIDGIT_WIDTH * 3 + 1 + SEGMENT_SPACING * 2
+const TOTAL_WIDTH = DIGIT_WIDTH * 3 + 1 + SEGMENT_SPACING * 2
 
 </script>
+
+<style>
+img{
+  position: relative;
+  z-index: 2;
+}
+</style>
