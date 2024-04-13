@@ -1,6 +1,5 @@
 <template>
   <S2000 />
-  
 </template>
 
 <script setup lang="ts">
@@ -12,5 +11,6 @@ import S2000 from './components/S2000.vue'
 <style>
 body{
   background-color: rgb(29, 29, 29);
+  overflow: hidden;
 }
 </style>
