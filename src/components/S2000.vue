@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative;">
+  <!-- <div style="position: relative;"> -->
     <!-- S2K GAUGES -->
     <!-- <img 
       src="../assets/s2k.svg"
@@ -9,7 +9,7 @@
     <!--  -->
 
     <!-- SPEEDOMETER -->
-    <!-- <div
+    <div
       :style="{
         // transform: 'skew(-10deg)',
         background: '#110000',
@@ -36,31 +36,31 @@
           }"
         />
       </div>
-    </div> -->
-    <!--  -->
-
-    <!-- TACHOMETER -->
-    <!-- <div
-      :style="{
-        position: 'absolute',
-        background: 'orange',
-        height: '100px',
-        width: `${(rpm + 1) / 20}px`,
-        rotate: '-45deg',
-        top: '330px',
-        left: '140px',
-      }"
-    >
-  </div> -->
-
+    </div>
+<!-- 
     <svg width="400" height="400">
-      <path ref="curve" d="M50 100 Q200 50 350 100" fill="none" stroke="black" />
+      <path ref="curve" d="M50 100 Q200 50 350 100" fill="none"/>
       <mask :id="maskId">
-        <rect x="0" y="0" width="100%" height="100%" fill="black" /> <!-- Cover the entire SVG with the mask -->
-        <path :d="maskPath" fill="white" /> <!-- Use white to reveal the original path -->
+        <rect x="0" y="0" width="100%" height="100%" fill="black" />
+        <path :d="maskPath" fill="white" />
       </mask>
       <path :d="revealedPath" fill="none" stroke="red" stroke-width="20" :mask="`url(#${maskId})`" />
     </svg>
+  </div> -->
+
+  <div
+    v-for="index in computeRpmIndexes"
+    :style="{
+      position: 'absolute',
+      left: `${-300 * Math.cos(index / 25 + 0.65) + 500}px`,
+      top: `${-300 * Math.sin(index / 25 + 0.65) + 500}px`,
+      rotate: `${index / 25 + Math.PI / 2 + 0.65}rad`,
+      height: '30px',
+      width: '7px',
+      background: index >= 41 ? 'red' : 'orange',
+      boxShadow: index >= 41 ? '0 0 10px red' : '0 0 10px orange',
+    }"
+  >
   </div>
 </template>
 
@@ -82,6 +82,9 @@ const TOTAL_WIDTH = DIGIT_WIDTH * 3 + 1 + SEGMENT_SPACING * 2
 
 
 import { ref, computed } from 'vue';
+
+const computeRpmIndexes = computed(() => Math.round(rpm.value / 8000 * 45)
+)
 
 
 const maskId = 'mask';
