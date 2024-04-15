@@ -85,7 +85,8 @@ const engineController = () => {
     rpmGain,
     isAccelerating,
     isShifting,
-    gear
+    gear,
+    MAX_RPM,
   }
 }
 
