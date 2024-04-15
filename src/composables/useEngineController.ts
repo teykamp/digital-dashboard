@@ -51,7 +51,8 @@ const engineController = () => {
       speed.value += 2 * GEAR_RATIOS[gear.value - 1]
     }    
 
-    if (rpm.value > MAX_RPM) rpm.value *= 0.95
+    if (rpm.value > MAX_RPM) rpm.value *= 0.99
+
     rpm.value = Math.max(rpm.value * .99, MIN_RPM)
     
     rpmGain.value *= (0.99)
@@ -84,7 +85,8 @@ const engineController = () => {
     rpmGain,
     isAccelerating,
     isShifting,
-    gear
+    gear,
+    MAX_RPM,
   }
 }
 
