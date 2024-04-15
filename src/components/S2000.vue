@@ -1,4 +1,5 @@
 <template>
+  <div style="position: relative;">
     <div
       :style="{
         // transform: 'skew(-10deg)',
@@ -41,19 +42,20 @@
 
 
   <!-- This should be its own component -->
-  <div
-    v-for="index in computeRpmIndexes"
-    :style="{
-      position: 'absolute',
-      left: `${-300 * Math.cos(index / 25 + 0.65)}px`,
-      top: `${-300 * Math.sin(index / 25 + 0.65)}px`,
-      rotate: `${index / 25 + Math.PI / 2 + 0.65}rad`,
-      height: '30px',
-      width: '7px',
-      background: index >= 41 ? 'red' : 'orange',
-      boxShadow: index >= 41 ? '0 0 10px red' : '0 0 10px orange',
-    }"
-  >
+    <div
+      v-for="index in computeRpmIndexes"
+      :style="{
+        position: 'absolute',
+        left: `${-300 * Math.cos(index / 25 + 0.65)}px`,
+        top: `${-300 * Math.sin(index / 25 + 0.65)}px`,
+        rotate: `${index / 25 + Math.PI / 2 + 0.65}rad`,
+        height: '30px',
+        width: '7px',
+        background: index >= 41 ? 'red' : 'orange',
+        boxShadow: index >= 41 ? '0 0 10px red' : '0 0 10px orange',
+      }"
+    >
+    </div>
   </div>
 </template>
 
