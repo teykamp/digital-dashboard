@@ -37,7 +37,7 @@ const computeSegmentColor = (displayCondition: boolean) => {
       ? props.color 
       : (props.showOffSegments ? dimmedColor : 'rgba(0, 0, 0, 0)'),
     'box-shadow': displayCondition 
-      ? '0px 0px 20px red' 
+      ? `0px 0px 20px ${props.color}` 
       : '',
   }
 }
