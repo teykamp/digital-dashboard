@@ -51,8 +51,8 @@
         rotate: `${index / 25 + Math.PI / 2 + 0.65}rad`,
         height: '30px',
         width: '7px',
-        background: index >= 41 ? 'red' : 'orange',
-        boxShadow: index >= 41 ? '0 0 10px red' : '0 0 10px orange',
+        background: index >= (TACHOMETER_SEGMENTS - 5) ? 'red' : 'orange',
+        boxShadow: index >= (TACHOMETER_SEGMENTS - 5) ? '0 0 10px red' : '0 0 10px orange',
       }"
     >
     </div>
