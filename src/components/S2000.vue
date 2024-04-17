@@ -44,9 +44,10 @@
         color: '#fc5f40',
       }"
     >
-      <p style="margin-top: 0px">76F {{ hours }}{{ showColonOnClock ? ':' : ' ' }}{{  minutes }}</p>
+      
+      <p style="margin-top: 0px">{{ hours }}{{ showColonOnClock ? ':' : ' ' }}{{  minutes }}</p>
       <div style="background: #fc5f40; height: 1px; width: 98%; margin-top: -16px; margin-left: 1%"></div>
-      <p style="margin-top: -1px">456</p>
+      <p style="margin-top: -1px">{{ odometerValue.toString().padStart(6, '0')}}</p>
     </div>
 
   <!-- This should be its own component -->
@@ -77,7 +78,7 @@ import useTripComputer from '../composables/useTripComputer'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 
-const { showColonOnClock, hours, minutes } = useTripComputer()
+const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed)
 
 const SEGMENT_HEIGHT = 35
 const SEGMENT_WIDTH = 10
