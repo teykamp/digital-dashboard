@@ -29,7 +29,7 @@ const useTripComputer = (speed: Ref) => {
     showColonOnClock,
     hours,
     minutes,
-    odometerValue: computed(() => Math.floor(speedSum.value / 3600 + 1)),
+    odometerValue: computed(() => speedSum.value / 3600 + 1),
   }
 }
 

@@ -1,3 +1,5 @@
+// Used to convert a number into an array of digits
+
 const computeDigits = (speed: number, ignoreLeadingZeroes: boolean = false) => {
   const digit1 = Math.floor((speed / 100) % 10)
   const digit2 = Math.floor((speed / 10) % 10)

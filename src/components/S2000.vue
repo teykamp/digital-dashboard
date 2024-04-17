@@ -2,11 +2,11 @@
   <div style="position: relative;">
     <div
       :style="{
-        // transform: 'skew(-10deg)',
         background: '#110000',
         height: `${DIGIT_HEIGHT}px`,
         width: `${TOTAL_WIDTH}px`,
         padding: '15px',
+        paddingLeft: '20px',
         position: 'absolute',
         borderRadius: '10px',
       }"
@@ -14,8 +14,9 @@
       <div 
         v-for="index in 3"
         :style="{
-            'padding-left': `${(index - 1) * (DIGIT_WIDTH + SEGMENT_SPACING)}px`,
-          }"
+          transform: 'skew(-5deg)',
+          'padding-left': `${(index - 1) * (DIGIT_WIDTH + SEGMENT_SPACING)}px`,
+        }"
       >
         <SegmentDisplay
           :display-number="computeDigits(speed, true)[index - 1]"
@@ -35,7 +36,7 @@
         top: `${DIGIT_HEIGHT + 30 + 10}px`,
         position: 'absolute',
         background: '#110000',
-        width: `${TOTAL_WIDTH + 30}px`,
+        width: `${TOTAL_WIDTH + 35}px`,
         height: `${DIGIT_HEIGHT / 2 + 7}px`,
         borderRadius: '10px',
         'font-family': 'DSEG7-Classic-MINI',
@@ -45,9 +46,19 @@
       }"
     >
       
-      <p style="margin-top: 0px">{{ hours }}{{ showColonOnClock ? ':' : ' ' }}{{  minutes }}</p>
+      <p style="margin-top: 0px">{{ hours.toString().padStart(2, '0') }}{{ showColonOnClock ? ':' : ' ' }}{{  minutes.toString().padStart(2, '0') }}</p>
       <div style="background: #fc5f40; height: 1px; width: 98%; margin-top: -16px; margin-left: 1%"></div>
-      <p style="margin-top: -1px">{{ odometerValue.toString().padStart(6, '0')}}</p>
+      <div style="margin-top: -16px; display: flex; justify-content: space-between; padding-left: 10px; padding-right: 10px;">
+        
+        <p>{{ Math.floor(odometerValue).toString().padStart(6, '0') }}</p>
+        <p :style="{
+          fontFamily: 'Arial, Helvetica, sans-serif', 
+          fontStyle: 'normal',
+          color: useHexToRGBA('#fc5f40', 0.9),
+        }"
+        >TRIP A</p>
+        <p>{{ (Math.round(odometerValue * 10) / 10).toFixed(1) }}</p>
+      </div>
     </div>
 
   <!-- This should be its own component -->
@@ -75,6 +86,7 @@ import SegmentDisplay from './SegmentDisplay.vue'
 import computeDigits from '../functions/useComputeDigits'
 import useEngineController from '../composables/useEngineController'
 import useTripComputer from '../composables/useTripComputer'
+import useHexToRGBA from '../functions/useHexToRGBA'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 
