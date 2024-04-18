@@ -1,5 +1,13 @@
 <template>
-  <div style="position: relative;">
+  <div>
+    <img src="../assets/S2000/ap1.svg" alt="" height="400rem">
+  </div>
+
+  <!-- <div class="back">
+    <img src="../assets/S2000/ap1back.svg" alt=""  height="400rem">
+  </div> -->
+
+  <div style="position: absolute;">
     <div
       :style="{
         background: '#110000',
@@ -9,6 +17,9 @@
         paddingLeft: '20px',
         position: 'absolute',
         borderRadius: '10px',
+        zIndex: '2',
+        left: '500px',
+        top: '-400px'
       }"
     >
       <div 
@@ -31,6 +42,10 @@
       </div>
     </div>
     
+    <div :style="{
+      position: 'absolute',
+      top: '-400px'
+    }">
     <div
       :style="{
         top: `${DIGIT_HEIGHT + 30 + 10}px`,
@@ -43,6 +58,8 @@
         'font-weight': 'bold',
         fontStyle: 'italic',
         color: '#fc5f40',
+        left: '500px',
+        zIndex: '2'
       }"
     >
       
@@ -60,22 +77,29 @@
         <p>{{ (Math.round(odometerValue * 10) / 10).toFixed(1) }}</p>
       </div>
     </div>
+  </div>
 
   <!-- This should be its own component -->
-    <div
+    <div :style="{
+      position: 'absolute',
+      top: '-150px',
+      left: '650px',
+      zIndex: '2'
+    }"><div
       v-for="index in computeRpmIndexes"
       :style="{
         position: 'absolute',
-        left: `${-300 * Math.cos(index / 25 + 0.65)}px`,
-        top: `${-300 * Math.sin(index / 25 + 0.65)}px`,
+        left: `${-550 * Math.cos(index / 25 + 0.65)}px`,
+        top: `${-380 * Math.sin(index / 25 + 0.65)}px`,
         rotate: `${index / 25 + Math.PI / 2 + 0.65}rad`,
         height: '30px',
-        width: '7px',
+        width: '9px',
         background: index >= (TACHOMETER_SEGMENTS - 5) ? 'red' : 'orange',
         boxShadow: index >= (TACHOMETER_SEGMENTS - 5) ? '0 0 10px red' : '0 0 10px orange',
+        
       }"
     >
-    </div>
+    </div></div>
   </div>
 </template>
 
@@ -105,3 +129,17 @@ const TACHOMETER_SEGMENTS = 45
 
 const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOMETER_SEGMENTS))
 </script>
+
+<style>
+img{
+  position: relative;
+  top: -200px;
+  z-index: 1;
+}
+
+.back{
+  position: relative;
+  top: -600px;
+  z-index: 0;
+}
+</style>
