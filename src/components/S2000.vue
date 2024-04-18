@@ -1,11 +1,7 @@
 <template>
   <div>
-    <img src="../assets/S2000/ap1.svg" alt="" height="400rem">
+    <img src="../assets/S2000/ap1mph.svg" alt="" height="400rem">
   </div>
-
-  <!-- <div class="back">
-    <img src="../assets/S2000/ap1back.svg" alt=""  height="400rem">
-  </div> -->
 
   <div style="position: absolute;">
     <div
@@ -135,11 +131,5 @@ img{
   position: relative;
   top: -200px;
   z-index: 1;
-}
-
-.back{
-  position: relative;
-  top: -600px;
-  z-index: 0;
 }
 </style>
