@@ -26,7 +26,7 @@
         }"
       >
         <SegmentDisplay
-          :display-number="computeDigits(speed, true)[index - 1]"
+          :display-number="computeDigits(computedSpeed, true)[index - 1]"
           :car-type="'S2000'"
           :color="'#fc5f40'"
           :show-off-segments="true" 
@@ -63,14 +63,14 @@
       <div style="background: #fc5f40; height: 1px; width: 98%; margin-top: -16px; margin-left: 1%"></div>
       <div style="margin-top: -16px; display: flex; justify-content: space-between; padding-left: 10px; padding-right: 10px;">
         
-        <p>{{ Math.floor(odometerValue[0]).toString().padStart(6, '0') }}</p>
+        <p>{{ Math.floor(computedOdometerValue[0]).toString().padStart(6, '0') }}</p>
         <p :style="{
           fontFamily: 'Arial, Helvetica, sans-serif', 
           fontStyle: 'normal',
           color: useHexToRGBA('#fc5f40', 0.9),
         }"
         >TRIP {{ trip === 1 ? 'A' : 'B' }}</p>
-        <p>{{ (Math.round(odometerValue[trip] * 10) / 10).toFixed(1) }}</p>
+        <p>{{ (Math.round(computedOdometerValue[trip] * 10) / 10).toFixed(1) }}</p>
       </div>
     </div>
   </div>
@@ -93,17 +93,16 @@
           width: '9px',
           background: index >= (TACHOMETER_SEGMENTS - 5) ? 'red' : 'orange',
           boxShadow: index >= (TACHOMETER_SEGMENTS - 5) ? '0 0 10px red' : '0 0 10px orange',
-          
         }"
       ></div>
     </div>
   </div>
-  <button style="color: white;" @click="toggleTrip">toggle</button>
+  <button style="color: white;" @click="toggleTrip">trip</button>
+  <button style="color: white;" @click="toggleSpeedometerMode">{{speedometerMode}}</button>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-
 import SegmentDisplay from './SegmentDisplay.vue'
 import computeDigits from '../functions/useComputeDigits'
 import useEngineController from '../composables/useEngineController'
@@ -114,9 +113,12 @@ import convertMphToKph from '../functions/convertMphToKph'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 
-const { trip, toggleTrip } = useDashButtons()
+const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode } = useDashButtons()
 
 const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed, trip)
+
+const computedSpeed = computed(() => speedometerMode.value  === 'mph' ? speed.value : convertMphToKph(speed.value))
+const computedOdometerValue = computed(() => speedometerMode.value  === 'mph' ? odometerValue.value : odometerValue.value.map(value => convertMphToKph(value)))
 
 const SEGMENT_HEIGHT = 35
 const SEGMENT_WIDTH = 10
