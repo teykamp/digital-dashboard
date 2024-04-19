@@ -3,11 +3,11 @@ import type { Ref } from 'vue'
 
 // have weather use api
 
-const useTripComputer = (speed: Ref) => {
+const useTripComputer = (speed: Ref<number>, trip: Ref<1 | 2>) => {
   const showColonOnClock = ref(false)
   const hours = ref(0)
   const minutes = ref(0)
-  const speedSum = ref(0)
+  const speedSum = ref([0, 0, 0])
   
   const updateClock = () => {
     showColonOnClock.value = !showColonOnClock.value
@@ -17,7 +17,8 @@ const useTripComputer = (speed: Ref) => {
   }
 
   const updateOdometer = () => {
-    speedSum.value += speed.value
+    speedSum.value[trip.value] += speed.value
+    speedSum.value[0] += speed.value
   }
 
   setInterval(() => {
@@ -29,7 +30,7 @@ const useTripComputer = (speed: Ref) => {
     showColonOnClock,
     hours,
     minutes,
-    odometerValue: computed(() => speedSum.value / 3600 + 1),
+    odometerValue: computed(() => speedSum.value.map((value) => (value / 3600))),
   }
 }
 
