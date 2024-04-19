@@ -97,13 +97,22 @@
       ></div>
     </div>
   </div>
+  <div
+    v-if="true"
+    style="position: absolute; display: flex; justify-content: space-between; width: 500px; margin-top: -380px; z-index: 99; left: 690px; scale: 0.7;"
+  >
+    <TurnSignal direction="left" />
+    <TurnSignal direction="right" />
+  </div>
   <button style="color: white;" @click="toggleTrip">trip</button>
   <button style="color: white;" @click="toggleSpeedometerMode">{{speedometerMode}}</button>
+  
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import SegmentDisplay from './SegmentDisplay.vue'
+import TurnSignal from './TurnSignal.vue'
 import computeDigits from '../functions/useComputeDigits'
 import useEngineController from '../composables/useEngineController'
 import useTripComputer from '../composables/useTripComputer'
