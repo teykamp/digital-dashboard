@@ -109,7 +109,7 @@ import useEngineController from '../composables/useEngineController'
 import useTripComputer from '../composables/useTripComputer'
 import useDashButtons from '../composables/useDashButtons'
 import useHexToRGBA from '../functions/useHexToRGBA'
-import convertMphToKph from '../functions/convertMphToKph'
+import useConvertMphToKph from '../functions/useConvertMphToKph'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 
@@ -117,8 +117,8 @@ const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode } = useDashButt
 
 const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed, trip)
 
-const computedSpeed = computed(() => speedometerMode.value  === 'mph' ? speed.value : convertMphToKph(speed.value))
-const computedOdometerValue = computed(() => speedometerMode.value  === 'mph' ? odometerValue.value : odometerValue.value.map(value => convertMphToKph(value)))
+const computedSpeed = computed(() => speedometerMode.value  === 'mph' ? speed.value : useConvertMphToKph(speed.value))
+const computedOdometerValue = computed(() => speedometerMode.value  === 'mph' ? odometerValue.value : odometerValue.value.map(value => useConvertMphToKph(value)))
 
 const SEGMENT_HEIGHT = 35
 const SEGMENT_WIDTH = 10
@@ -140,4 +140,4 @@ img{
   top: -200px;
   z-index: 1;
 }
-</style>
+</style>../functions/useConvertMphToKph
