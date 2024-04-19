@@ -63,14 +63,14 @@
       <div style="background: #fc5f40; height: 1px; width: 98%; margin-top: -16px; margin-left: 1%"></div>
       <div style="margin-top: -16px; display: flex; justify-content: space-between; padding-left: 10px; padding-right: 10px;">
         
-        <p>{{ Math.floor(odometerValue).toString().padStart(6, '0') }}</p>
+        <p>{{ Math.floor(odometerValue[2]).toString().padStart(6, '0') }}</p>
         <p :style="{
           fontFamily: 'Arial, Helvetica, sans-serif', 
           fontStyle: 'normal',
           color: useHexToRGBA('#fc5f40', 0.9),
         }"
         >TRIP A</p>
-        <p>{{ (Math.round(odometerValue * 10) / 10).toFixed(1) }}</p>
+        <p>{{ (Math.round(odometerValue[trip] * 10) / 10).toFixed(1) }}</p>
       </div>
     </div>
   </div>
@@ -106,11 +106,14 @@ import SegmentDisplay from './SegmentDisplay.vue'
 import computeDigits from '../functions/useComputeDigits'
 import useEngineController from '../composables/useEngineController'
 import useTripComputer from '../composables/useTripComputer'
+import useDashButtons from '../composables/useDashButtons'
 import useHexToRGBA from '../functions/useHexToRGBA'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 
-const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed)
+const { trip } = useDashButtons()
+
+const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed, trip)
 
 const SEGMENT_HEIGHT = 35
 const SEGMENT_WIDTH = 10
