@@ -13,7 +13,7 @@ const useDashButtons = () => {
   }
 
   const signalIntervalId = ref<undefined | ReturnType<typeof setTimeout>>(undefined)
-  const signals = ref<('left' | 'right' | 'hazards' | null | boolean)[]>([false, false, null])
+  const signals = ref<(('left' | 'right' | 'hazards' | null) | boolean)[]>([false, false, null])
   const toggleSignal = (direction: 'left' | 'right' | 'hazards') => {
     clearTimeout(signalIntervalId.value)
     if (direction === 'left') {
