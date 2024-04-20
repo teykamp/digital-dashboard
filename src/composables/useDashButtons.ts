@@ -18,18 +18,16 @@ const useDashButtons = () => {
     clearTimeout(signalIntervalId.value)
     if (direction === 'left') {
       signals.value[0] = !signals.value[0]
-      signals.value[2] = direction
     }
-    if (direction === 'right') {
+    else if (direction === 'right') {
       signals.value[1] = !signals.value[1]
-      signals.value[2] = direction
     }
-    if (direction === 'hazards') {
+     else if (direction === 'hazards') {
       signals.value[0] = !signals.value[0]
       signals.value[1] = !signals.value[1]
-      signals.value[2] = direction
     }
-    signalIntervalId.value = setTimeout(() => toggleSignal(direction), 500)
+    signals.value[2] = direction
+    signalIntervalId.value = setTimeout(() => toggleSignal(direction), 300)
   }
 
 
