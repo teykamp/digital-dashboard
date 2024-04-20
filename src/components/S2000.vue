@@ -116,7 +116,6 @@
   </div>
   <button style="color: white;" @click="toggleTrip">trip</button>
   <button style="color: white;" @click="toggleSpeedometerMode">{{speedometerMode}}</button>
-  
 </template>
 
 <script setup lang="ts">
