@@ -101,8 +101,18 @@
     v-if="true"
     style="position: absolute; display: flex; justify-content: space-between; width: 500px; margin-top: -390px; z-index: 99; left: 690px; scale: 0.7;"
   >
-    <TurnSignal direction="left" />
-    <TurnSignal direction="right" />
+    <TurnSignal 
+      :style="{
+        opacity: signals[0] ? 1 : 0
+      }"
+      direction="left" 
+    />
+    <TurnSignal 
+      :style="{
+        opacity: signals[1] ? 1 : 0
+      }"
+      direction="right" 
+    />
   </div>
   <button style="color: white;" @click="toggleTrip">trip</button>
   <button style="color: white;" @click="toggleSpeedometerMode">{{speedometerMode}}</button>
@@ -122,7 +132,7 @@ import useConvertMphToKph from '../functions/useConvertMphToKph'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 
-const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode } = useDashButtons()
+const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons()
 
 const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed, trip)
 
