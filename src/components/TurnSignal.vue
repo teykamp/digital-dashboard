@@ -8,7 +8,8 @@
   >
     <div style="width: 20px; 
                 height: 30px; 
-                background-color: #20D6AF;"
+                background-color: #20D6AF;
+                box-shadow: 0 0 10px #20D6AF"
     ></div>
     <div style="width: 0; 
                 height: 0; 
@@ -32,7 +33,8 @@
     ></div>
     <div style="width: 20px; 
                 height: 30px; 
-                background-color: #20D6AF;"
+                background-color: #20D6AF;
+                box-shadow: 0 0 10px #20D6AF"
     ></div>
   </div>
 </template>

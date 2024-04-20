@@ -99,7 +99,7 @@
   </div>
   <div
     v-if="true"
-    style="position: absolute; display: flex; justify-content: space-between; width: 500px; margin-top: -380px; z-index: 99; left: 690px; scale: 0.7;"
+    style="position: absolute; display: flex; justify-content: space-between; width: 500px; margin-top: -390px; z-index: 99; left: 690px; scale: 0.7;"
   >
     <TurnSignal direction="left" />
     <TurnSignal direction="right" />
