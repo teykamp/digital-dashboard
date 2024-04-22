@@ -109,7 +109,7 @@
   </div>
   <div
     v-if="true"
-    style="position: relative; display: flex; justify-content: space-between; width: 500px; margin-top: -400px; z-index: 99; left: 38 0px; scale: 0.7;"
+    style="position: relative; display: flex; justify-content: space-between; width: 500px; margin-top: -400px; z-index: 99; left: 370px; scale: 0.7;"
   >
     <TurnSignal 
       :style="{
