@@ -1,6 +1,16 @@
 <template>
   <div>
-    <img src="../assets/S2000/ap1mph.svg" alt="" height="400rem">
+    <img 
+      v-if="speedometerMode === 'kph'"
+      src="../assets/S2000/ap1kph.svg" 
+      alt="" 
+      height="400rem">
+    <img 
+      v-else 
+      src="../assets/S2000/ap1mph.svg" 
+      alt="" 
+      height="400rem"
+    >
   </div>
 
   <div style="position: absolute;">
