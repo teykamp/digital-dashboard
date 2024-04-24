@@ -101,8 +101,8 @@
           rotate: `${index / 25 + Math.PI / 2 + 0.65}rad`,
           height: '30px',
           width: '9px',
-          background: index >= (TACHOMETER_SEGMENTS - 5) ? 'red' : 'orange',
-          boxShadow: index >= (TACHOMETER_SEGMENTS - 5) ? '0 0 10px red' : '0 0 10px orange',
+          background: index >= (TACHOMETER_SEGMENTS - 2) ? 'red' : 'orange',
+          boxShadow: index >= (TACHOMETER_SEGMENTS - 2) ? '0 0 10px red' : '0 0 10px orange',
         }"
       ></div>
     </div>
@@ -124,8 +124,8 @@
       direction="right" 
     />
   </div>
-  <button style="color: white;" @click="toggleTrip">trip</button>
-  <button style="color: white;" @click="toggleSpeedometerMode">{{speedometerMode}}</button>
+  <!-- <button style="color: white;" @click="toggleTrip">trip</button>
+  <button style="color: white;" @click="toggleSpeedometerMode">{{speedometerMode}}</button> -->
 </template>
 
 <script setup lang="ts">

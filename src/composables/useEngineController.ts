@@ -10,7 +10,7 @@ const engineController = () => {
 
   const speed = ref(0)
   const rpm = ref(0)
-  const rpmGain = ref(0)
+  const rpmGain = ref(300)
   const isAccelerating = ref(false)
   const isShifting = ref(false)
 
@@ -51,7 +51,7 @@ const engineController = () => {
       speed.value += 2 * GEAR_RATIOS[gear.value - 1]
     }    
 
-    rpm.value = Math.max(Math.min(rpm.value * .99, MAX_RPM), MIN_RPM)
+    rpm.value = Math.max(Math.min(rpm.value * 0.99, MAX_RPM), MIN_RPM)
     
     rpmGain.value *= (0.99)
 
@@ -68,6 +68,9 @@ const engineController = () => {
     window.addEventListener("keydown", handleKeyPress)
     window.addEventListener("keyup", handleKeyUp)
     gameLoopActive.value = true
+    setTimeout(() => {
+      rpmGain.value = -100
+    }, 800);
     gameLoop()
   })
 
