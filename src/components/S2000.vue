@@ -141,7 +141,16 @@ import useConvertMphToKph from '../functions/useConvertMphToKph'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 
-const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons()
+const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
+  {
+    keyCode: 'KeyT',
+    action: () => toggleTrip()
+  },
+  {
+    keyCode: 'KeyU',
+    action: () => toggleSpeedometerMode()
+  }
+])
 
 const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed, trip)
 

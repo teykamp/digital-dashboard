@@ -1,6 +1,11 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const useDashButtons = () => {
+interface KeyPressEvent {
+  keyCode: string;
+  action: (event: KeyboardEvent) => void;
+}
+
+const useDashButtons = (eventListeners: KeyPressEvent[] = []) => {
 
   const trip = ref<1 | 2>(1)
   const toggleTrip = () => {
@@ -34,7 +39,6 @@ const useDashButtons = () => {
 
   }
 
-
   const handleKeyPress = (event: KeyboardEvent) => {
     if (event.code === "ArrowRight") {
       if (signals.value[2] === "right")  {
@@ -60,6 +64,12 @@ const useDashButtons = () => {
       toggleSignal(null)
       toggleSignal('hazards')
     }
+
+    eventListeners.forEach(listener => {
+      if (event.code === listener.keyCode) {
+          listener.action(event)
+      }
+  })
   }
 
   onMounted(() => {
