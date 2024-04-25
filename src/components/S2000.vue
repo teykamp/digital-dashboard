@@ -172,9 +172,9 @@ const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOM
 </script>
 
 <style>
-img{
+img {
   position: relative;
   top: -200px;
   z-index: 1;
 }
-</style>../functions/useConvertMphToKph
+</style>
