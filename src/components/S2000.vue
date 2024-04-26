@@ -1,12 +1,12 @@
 <template>
   <div>
     <img 
-      v-if="speedometerMode === 'kph'"
+      v-show="speedometerMode === 'kph'"
       src="../assets/S2000/ap1kph.svg" 
       alt="" 
       height="400rem">
     <img 
-      v-else 
+      v-show="speedometerMode === 'mph'" 
       src="../assets/S2000/ap1mph.svg" 
       alt="" 
       height="400rem"
