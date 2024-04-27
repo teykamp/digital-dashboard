@@ -1,6 +1,6 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const engineController = () => {
+const useEngineController = () => {
       // CONSTANTS  
   const MAX_GEARS = 6
   const MAX_RPM = 8000
@@ -91,5 +91,5 @@ const engineController = () => {
   }
 }
 
-export default engineController
+export default useEngineController
 
