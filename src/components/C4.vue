@@ -44,25 +44,13 @@
 </template>
 
 <script setup lang="ts">
-import useEngineController from '../composables/useEngineController'
-// import useTripComputer from '../composables/useTripComputer'
-
 import { computed } from 'vue'
 // import TurnSignal from './TurnSignal.vue'
-
+import useEngineController from '../composables/useEngineController'
 import useDashButtons from '../composables/useDashButtons';
+// import useTripComputer from '../composables/useTripComputer'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
-
-
-const SPEEDOMETER_SEGMENTS = 34
-const TACHOMETER_SEGMENTS = 30
-const SEGMENT_HEIGHT = 7
-const MAX_SPEED = 85
-
-const computeSpeedIndexes = computed(() => Math.round(Math.min(speed.value / MAX_SPEED, 1) * SPEEDOMETER_SEGMENTS))
-const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOMETER_SEGMENTS))
-
 const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
   {
     keyCode: 'KeyT',
@@ -73,6 +61,15 @@ const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = us
     action: () => toggleSpeedometerMode()
   }
 ])
+
+const SPEEDOMETER_SEGMENTS = 34
+const TACHOMETER_SEGMENTS = 30
+const SEGMENT_HEIGHT = 7
+const MAX_SPEED = 85
+
+const computeSpeedIndexes = computed(() => Math.round(Math.min(speed.value / MAX_SPEED, 1) * SPEEDOMETER_SEGMENTS))
+const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOMETER_SEGMENTS))
+
 </script>
 
 <style>
