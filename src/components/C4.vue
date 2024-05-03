@@ -46,7 +46,7 @@
       :style="{
         width: '35px',
         height: '55px',
-        background: computeDigits(speed, true)[3 - index] === 10 ? '#0F1719' : '#3C2712',
+        background: computeDigits(computedSpeed, true)[3 - index] === 10 ? '#0F1719' : '#3C2712',
         position: 'absolute',
         bottom: '25px',
         borderRadius: '10px',
@@ -60,18 +60,18 @@
       }"
     >
       <p style="margin-top: -6px; margin-left: -1px;">
-        {{ computeDigits(speed, true)[3 - index] === 10 ? '' : computeDigits(speed, true)[3 - index] }}
+        {{ computeDigits(computedSpeed, true)[3 - index] === 10 ? '' : computeDigits(computedSpeed, true)[3 - index] }}
       </p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ComputedRef } from 'vue'
 // import TurnSignal from './TurnSignal.vue'
 import useEngineController from '../composables/useEngineController'
 import { useDashButtons } from '../composables/useDashButtons';
-// import useTripComputer from '../composables/useTripComputer'
+import useTripComputer from '../composables/useTripComputer'
 import computeDigits from '../functions/useComputeDigits'
 import useUnitComputation from '../composables/useUnitComputation'
 
@@ -86,6 +86,9 @@ const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = us
     action: () => toggleSpeedometerMode()
   }
 ])
+
+const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed, trip)
+
 
 const SPEEDOMETER_SEGMENTS = 34
 const TACHOMETER_SEGMENTS = 30
