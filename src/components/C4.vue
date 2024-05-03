@@ -40,6 +40,29 @@
         boxShadow: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 3) ? '0 0 5px #DA4D3F' : '0 0 5px #E6A325') : '0 0 5px #639D59',
       }"
     ></div>
+
+    <div
+      v-for="index in 3"
+      :style="{
+        width: '35px',
+        height: '55px',
+        background: computeDigits(speed, true)[3 - index] === 10 ? '#0F1719' : '#3C2712',
+        position: 'absolute',
+        bottom: '25px',
+        borderRadius: '10px',
+        left: `-${(index - 1) * 40 + 260}px`,
+        zIndex: '2',
+        transform: 'skew(-5deg)',
+        fontSize: '45px',
+        'font-family': 'DSEG7-Classic-MINI',
+        'font-weight': 'bold',
+        color: '#E6A325',
+      }"
+    >
+      <p style="margin-top: -6px; margin-left: -1px;">
+        {{ computeDigits(speed, true)[3 - index] === 10 ? '' : computeDigits(speed, true)[3 - index] }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -49,6 +72,8 @@ import { computed } from 'vue'
 import useEngineController from '../composables/useEngineController'
 import useDashButtons from '../composables/useDashButtons';
 // import useTripComputer from '../composables/useTripComputer'
+import computeDigits from '../functions/useComputeDigits'
+
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
@@ -69,7 +94,10 @@ const MAX_SPEED = 85
 
 const computeSpeedIndexes = computed(() => Math.round(Math.min(speed.value / MAX_SPEED, 1) * SPEEDOMETER_SEGMENTS))
 const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOMETER_SEGMENTS))
-
+const computedSpeedText = computed(() => {
+  const computedValue = computeDigits(speed.value, true)[3 - index]; 
+    computedValue === 10 ? '' : computedValue
+})
 </script>
 
 <style>

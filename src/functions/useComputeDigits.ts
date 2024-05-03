@@ -12,7 +12,11 @@ const computeDigits = (speed: number, ignoreLeadingZeroes: boolean = false) => {
       digit3
     ]
   } else {
-    return [digit1, digit2, digit3]
+    return [
+            digit1, 
+            digit2, 
+            digit3
+          ]
   }
 }
 

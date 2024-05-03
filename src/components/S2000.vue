@@ -154,6 +154,7 @@ const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = us
 
 const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed, trip)
 
+// needs to be in composable
 const computedSpeed = computed(() => speedometerMode.value  === 'mph' ? speed.value : useConvertMphToKph(speed.value))
 const computedOdometerValue = computed(() => speedometerMode.value  === 'mph' ? odometerValue.value : odometerValue.value.map(value => useConvertMphToKph(value)))
 
