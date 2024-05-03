@@ -70,10 +70,10 @@
 import { computed } from 'vue'
 // import TurnSignal from './TurnSignal.vue'
 import useEngineController from '../composables/useEngineController'
-import useDashButtons from '../composables/useDashButtons';
+import { useDashButtons } from '../composables/useDashButtons';
 // import useTripComputer from '../composables/useTripComputer'
 import computeDigits from '../functions/useComputeDigits'
-
+import useUnitComputation from '../composables/useUnitComputation'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
@@ -94,10 +94,9 @@ const MAX_SPEED = 85
 
 const computeSpeedIndexes = computed(() => Math.round(Math.min(speed.value / MAX_SPEED, 1) * SPEEDOMETER_SEGMENTS))
 const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOMETER_SEGMENTS))
-const computedSpeedText = computed(() => {
-  const computedValue = computeDigits(speed.value, true)[3 - index]; 
-    computedValue === 10 ? '' : computedValue
-})
+
+const computedSpeed = useUnitComputation(speed, speedometerMode) as ComputedRef<number>
+const computedOdometerValue = useUnitComputation(odometerValue, speedometerMode) as ComputedRef<number[]>
 </script>
 
 <style>

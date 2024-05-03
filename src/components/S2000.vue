@@ -129,15 +129,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ComputedRef } from 'vue'
 import SegmentDisplay from './SegmentDisplay.vue'
 import TurnSignal from './TurnSignal.vue'
 import computeDigits from '../functions/useComputeDigits'
 import useEngineController from '../composables/useEngineController'
 import useTripComputer from '../composables/useTripComputer'
-import useDashButtons from '../composables/useDashButtons'
+import { useDashButtons } from '../composables/useDashButtons'
 import useHexToRGBA from '../functions/useHexToRGBA'
-import useConvertMphToKph from '../functions/useConvertMphToKph'
+import useUnitComputation from '../composables/useUnitComputation'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 
@@ -154,9 +154,8 @@ const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = us
 
 const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed, trip)
 
-// needs to be in composable
-const computedSpeed = computed(() => speedometerMode.value  === 'mph' ? speed.value : useConvertMphToKph(speed.value))
-const computedOdometerValue = computed(() => speedometerMode.value  === 'mph' ? odometerValue.value : odometerValue.value.map(value => useConvertMphToKph(value)))
+const computedSpeed = useUnitComputation(speed, speedometerMode) as ComputedRef<number>
+const computedOdometerValue = useUnitComputation(odometerValue, speedometerMode) as ComputedRef<number[]>
 
 const SEGMENT_HEIGHT = 35
 const SEGMENT_WIDTH = 10

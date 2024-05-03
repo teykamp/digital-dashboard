@@ -5,14 +5,16 @@ interface KeyPressEvent {
   action: (event: KeyboardEvent) => void;
 }
 
-const useDashButtons = (eventListeners: KeyPressEvent[] = []) => {
+export type SpeedometerMode = 'mph' | 'kph'
+
+export const useDashButtons = (eventListeners: KeyPressEvent[] = []) => {
 
   const trip = ref<1 | 2>(1)
   const toggleTrip = () => {
     trip.value = trip.value === 1 ? 2 : 1
   }
 
-  const speedometerMode = ref<'mph' | 'kph'>('mph')
+  const speedometerMode = ref<SpeedometerMode>('mph')
   const toggleSpeedometerMode = () => {
     speedometerMode.value = speedometerMode.value === 'mph' ? 'kph' : 'mph'
   }
@@ -90,5 +92,3 @@ const useDashButtons = (eventListeners: KeyPressEvent[] = []) => {
     toggleSpeedometerMode,
   }
 }
-
-export default useDashButtons
