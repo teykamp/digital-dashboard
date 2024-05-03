@@ -20,6 +20,7 @@
         position: 'absolute',
         height: `${SEGMENT_HEIGHT}px`,
         width: '270px',
+        left: '3px',
         background: '#639D59',
         bottom: `${(SEGMENT_HEIGHT + 1) * index}px`,
         boxShadow: '0 0 5px #639D59',
