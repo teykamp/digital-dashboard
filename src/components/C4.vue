@@ -34,8 +34,8 @@
         position: 'absolute',
         height: '270px',
         width: `${SEGMENT_HEIGHT}px`,
-        left: `${(SEGMENT_HEIGHT + 1) * index + 330}px`,
-        bottom: '6px',
+        left: `${(SEGMENT_HEIGHT + 1) * index + 325}px`,
+        bottom: '3px',
         background: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 3) ? '#DA4D3F' : '#E6A325') : '#639D59',
         boxShadow: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 3) ? '0 0 5px #DA4D3F' : '0 0 5px #E6A325') : '0 0 5px #639D59',
       }"
@@ -61,6 +61,28 @@
     >
       <p style="margin-top: -6px; margin-left: -1px;">
         {{ computeDigits(computedSpeed, true)[3 - index] === 10 ? '' : computeDigits(computedSpeed, true)[3 - index] }}
+      </p>
+    </div>
+    <div
+      v-for="index in 2"
+      :style="{
+        width: '35px',
+        height: '55px',
+        background: computeDigits(computedRpm, true)[index] === 10 ? '#0F1719' : '#3C2712',
+        position: 'absolute',
+        bottom: '10px',
+        borderRadius: '10px',
+        left: `${index * 40 + 425}px`,
+        zIndex: '2',
+        transform: 'skew(-5deg)',
+        fontSize: '45px',
+        'font-family': 'DSEG7-Classic-MINI',
+        'font-weight': 'bold',
+        color: '#E6A325',
+      }"
+    >
+      <p style="margin-top: -6px; margin-left: -1px;">
+        {{ computeDigits(computedRpm, true)[index] === 10 ? '' : computeDigits(computedRpm, true)[index] }}
       </p>
     </div>
   </div>
@@ -91,7 +113,7 @@ const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(spee
 
 
 const SPEEDOMETER_SEGMENTS = 34
-const TACHOMETER_SEGMENTS = 30
+const TACHOMETER_SEGMENTS = 31
 const SEGMENT_HEIGHT = 7
 const MAX_SPEED = 85
 
@@ -100,6 +122,7 @@ const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOM
 
 const computedSpeed = useUnitComputation(speed, speedometerMode) as ComputedRef<number>
 const computedOdometerValue = useUnitComputation(odometerValue, speedometerMode) as ComputedRef<number[]>
+const computedRpm = computed(() => Math.round(rpm.value / 100))
 </script>
 
 <style>
@@ -107,5 +130,6 @@ img {
   position: relative;
   top: -100px;
   z-index: 1;
+  transform: rotate(1deg);
 }
 </style>
