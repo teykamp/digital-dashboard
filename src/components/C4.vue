@@ -1,5 +1,5 @@
 <template>
-  <div style="background: black; padding-top: 120px; border-radius: 10px; padding-left: 5px; padding-right: 5px; position: relative;">
+  <div>
     <img 
       v-show="speedometerMode === 'kph'"
       src="../assets/C4/c4eu.svg" 
