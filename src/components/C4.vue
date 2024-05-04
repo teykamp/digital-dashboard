@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position: relative;">
     <img 
       v-show="speedometerMode === 'kph'"
       src="../assets/C4/c4eu.svg" 
@@ -15,18 +15,36 @@
       position: 'absolute',
       height: '270px',
       width: '260px',
-      top: '80px',
+      top: '-30px',
       left: '15px',
-      background: '#1D1D1D',
+      background: '#203a2c',
       zIndex: '0',
     }"></div>
     <div :style="{
       position: 'absolute',
       height: '270px',
-      width: '260px',
-      top: '100px',
+      width: '167px',
+      top: '-25px',
       left: '850px',
-      background: '#1D1D1D',
+      background: '#203a2c',
+      zIndex: '0',
+    }"></div>
+    <div :style="{
+      position: 'absolute',
+      height: '270px',
+      width: '32px',
+      top: '-25px',
+      left: '1017px',
+      background: '#7f5b28',
+      zIndex: '0',
+    }"></div>
+    <div :style="{
+      position: 'absolute',
+      height: '270px',
+      width: '35px',
+      top: '-25px',
+      left: '1049px',
+      background: '#6b2f27',
       zIndex: '0',
     }"></div>
   </div>
@@ -55,7 +73,7 @@
         position: 'absolute',
         height: '270px',
         width: `${SEGMENT_HEIGHT}px`,
-        left: `${(SEGMENT_HEIGHT + 1) * index + 330}px`,
+        left: `${(SEGMENT_HEIGHT + 1) * index + 325}px`,
         bottom: '3px',
         background: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 3) ? '#DA4D3F' : '#E6A325') : '#639D59',
         boxShadow: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 3) ? '0 0 5px #DA4D3F' : '0 0 5px #E6A325') : '0 0 5px #639D59',
