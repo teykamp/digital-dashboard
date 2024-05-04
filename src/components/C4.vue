@@ -133,6 +133,7 @@
       'font-weight': 'bold',
       color: '#E6A325',
       fontSize: '25px',
+      transform: 'skew(-5deg)',
     }"
   ><p style="margin-top: 0px; transform: translateY(-4px); text-align: right; margin-right: 4px;">
     {{ computeOilTemp }}
@@ -151,9 +152,29 @@
       'font-weight': 'bold',
       color: '#E6A325',
       fontSize: '25px',
+      transform: 'skew(-5deg)',
     }"
   ><p style="margin-top: 0px; transform: translateY(-4px); text-align: right; margin-right: 4px;">
     {{ computeCoolantTemp }}
+  </p></div>
+  <div
+    :style="{
+      position: 'relative',
+      height: '30px',
+      width: '88px',
+      borderRadius: '10px',
+      background: '#3C2712',
+      top: '-384px',
+      left: '393px',
+      zIndex: '2',
+      'font-family': 'DSEG7-Classic-MINI',
+      'font-weight': 'bold',
+      color: '#E6A325',
+      fontSize: '25px',
+      transform: 'skew(-5deg)',
+    }"
+  ><p style="margin-top: 0px; transform: translateY(-4px); text-align: right; margin-right: 4px;">
+    {{ computedOdometerValue[1].toFixed(1) }}
   </p></div>
   <div style="position: relative;">
     <img
@@ -164,7 +185,7 @@
     <img
       v-show="gear >= 4"
       src="../assets/C4/od.svg"
-      style="position: absolute; height: 30px; left: 970px; top: -280px;"
+      style="position: absolute; height: 30px; left: 970px; top: -300px;"
     >
   </div>
 </template>

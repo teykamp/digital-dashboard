@@ -7,7 +7,7 @@ const useTripComputer = (speed: Ref<number>, trip: Ref<1 | 2>) => {
   const showColonOnClock = ref(false)
   const hours = ref(0)
   const minutes = ref(0)
-  const speedSum = ref([0, 0, 0])
+  const speedSum = ref([0, 0, 0]) // total, trip 1, trip 2
   
   const updateClock = () => {
     showColonOnClock.value = !showColonOnClock.value
