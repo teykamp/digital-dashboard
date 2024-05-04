@@ -18,7 +18,6 @@
       top: '-30px',
       left: '15px',
       background: '#203a2c',
-      zIndex: '0',
     }"></div>
     <div :style="{
       position: 'absolute',
@@ -27,7 +26,6 @@
       top: '-25px',
       left: '850px',
       background: '#203a2c',
-      zIndex: '0',
     }"></div>
     <div :style="{
       position: 'absolute',
@@ -36,7 +34,6 @@
       top: '-25px',
       left: '1017px',
       background: '#7f5b28',
-      zIndex: '0',
     }"></div>
     <div :style="{
       position: 'absolute',
@@ -45,12 +42,9 @@
       top: '-25px',
       left: '1049px',
       background: '#6b2f27',
-      zIndex: '0',
     }"></div>
   </div>
-
   
-
   <div style="position: relative; margin-top: -60px; left: 10px; top: -100px">
     <div 
       v-for="index in computeSpeedIndexes"
@@ -79,7 +73,7 @@
         boxShadow: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 3) ? '0 0 5px #DA4D3F' : '0 0 5px #E6A325') : '0 0 5px #639D59',
       }"
     ></div>
-
+      <!-- following should be componentized -->
     <div
       v-for="index in 3"
       :style="{
@@ -125,6 +119,54 @@
       </p>
     </div>
   </div>
+  <div
+    :style="{
+      position: 'relative',
+      height: '30px',
+      width: '70px',
+      borderRadius: '10px',
+      background: '#3C2712',
+      top: '-424px',
+      left: '402px',
+      zIndex: '2',
+      'font-family': 'DSEG7-Classic-MINI',
+      'font-weight': 'bold',
+      color: '#E6A325',
+      fontSize: '25px',
+    }"
+  ><p style="margin-top: 0px; transform: translateY(-4px); text-align: right; margin-right: 4px;">
+    {{ computeOilTemp }}
+  </p></div>
+  <div
+    :style="{
+      position: 'relative',
+      height: '30px',
+      width: '70px',
+      borderRadius: '10px',
+      background: '#3C2712',
+      top: '-452px',
+      left: '645px',
+      zIndex: '2',
+      'font-family': 'DSEG7-Classic-MINI',
+      'font-weight': 'bold',
+      color: '#E6A325',
+      fontSize: '25px',
+    }"
+  ><p style="margin-top: 0px; transform: translateY(-4px); text-align: right; margin-right: 4px;">
+    {{ computeCoolantTemp }}
+  </p></div>
+  <div style="position: relative;">
+    <img
+      v-show="rpm >= 2500"
+      src="../assets/C4/upshift.svg"
+      style="position: absolute; height: 40px; left: 850px; top: -410px;"
+    >
+    <img
+      v-show="gear >= 4"
+      src="../assets/C4/od.svg"
+      style="position: absolute; height: 30px; left: 970px; top: -280px;"
+    >
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -136,32 +178,30 @@ import useTripComputer from '../composables/useTripComputer'
 import computeDigits from '../functions/useComputeDigits'
 import useUnitComputation from '../composables/useUnitComputation'
 
-const { speed, rpm, MAX_RPM } = useEngineController()
-const { trip, toggleTrip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
-  {
-    keyCode: 'KeyT',
-    action: () => toggleTrip()
-  },
+const { speed, rpm, gear } = useEngineController()
+const { trip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
   {
     keyCode: 'KeyU',
     action: () => toggleSpeedometerMode()
   }
 ])
 
-const { showColonOnClock, hours, minutes, odometerValue } = useTripComputer(speed, trip)
-
+const { odometerValue } = useTripComputer(speed, trip)
 
 const SPEEDOMETER_SEGMENTS = 34
 const TACHOMETER_SEGMENTS = 31
 const SEGMENT_HEIGHT = 7
 const MAX_SPEED = 85
+const MAX_TACHOMETER = 6000
 
 const computeSpeedIndexes = computed(() => Math.round(Math.min(speed.value / MAX_SPEED, 1) * SPEEDOMETER_SEGMENTS))
-const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOMETER_SEGMENTS))
+const computeRpmIndexes = computed(() => Math.round(Math.min(rpm.value / MAX_TACHOMETER, 1) * TACHOMETER_SEGMENTS))
 
 const computedSpeed = useUnitComputation(speed, speedometerMode) as ComputedRef<number>
 const computedOdometerValue = useUnitComputation(odometerValue, speedometerMode) as ComputedRef<number[]>
 const computedRpm = computed(() => Math.round(rpm.value / 100))
+const computeOilTemp = computed(() => speedometerMode.value === 'mph' ? '202' : '94')
+const computeCoolantTemp = computed(() => speedometerMode.value === 'mph' ? '198' : '92')
 </script>
 
 <style>
