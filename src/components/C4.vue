@@ -180,12 +180,12 @@
     <img
       v-show="rpm >= 2500"
       src="../assets/C4/upshift.svg"
-      style="position: absolute; height: 40px; left: 850px; top: -410px;"
+      style="position: absolute; height: 80px; left: 820px; top: -460px;"
     >
     <img
       v-show="gear >= 4"
       src="../assets/C4/od.svg"
-      style="position: absolute; height: 30px; left: 970px; top: -300px;"
+      style="position: absolute; height: 25px; left: 993px; top: -315px;"
     >
   </div>
 </template>
