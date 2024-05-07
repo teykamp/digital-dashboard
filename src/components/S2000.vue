@@ -108,7 +108,6 @@
     </div>
   </div>
   <div
-    v-if="true"
     style="position: relative; display: flex; justify-content: space-between; width: 500px; margin-top: -400px; z-index: 99; left: 370px; scale: 0.7;"
   >
     <TurnSignal 
@@ -124,8 +123,7 @@
       direction="right" 
     />
   </div>
-  <!-- <button style="color: white;" @click="toggleTrip">trip</button>
-  <button style="color: white;" @click="toggleSpeedometerMode">{{speedometerMode}}</button> -->
+
 </template>
 
 <script setup lang="ts">
