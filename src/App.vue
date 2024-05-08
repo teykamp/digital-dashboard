@@ -1,13 +1,15 @@
 <template>
   <!-- <S2000 /> -->
-  <C4 />
+  <!-- <C4 /> -->
+  <Homepage />
 </template>
 
 <script setup lang="ts">
 // https://github.com/keshikan/DSEG
 import 'dseg/css/dseg.css' // globally
 // import S2000 from './components/S2000.vue'
-import C4 from './components/C4.vue'
+// import C4 from './components/C4.vue'
+import Homepage from './components/Homepage.vue'
 </script>
 
 <style>
