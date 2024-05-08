@@ -108,24 +108,17 @@
     </div>
   </div>
   <div
-    v-if="true"
     style="position: relative; display: flex; justify-content: space-between; width: 500px; margin-top: -400px; z-index: 99; left: 370px; scale: 0.7;"
   >
-    <TurnSignal 
-      :style="{
-        opacity: signals[0] ? 1 : 0
-      }"
-      direction="left" 
-    />
-    <TurnSignal 
-      :style="{
-        opacity: signals[1] ? 1 : 0
-      }"
-      direction="right" 
-    />
+  <TurnSignal
+    v-for="index in 2" 
+    :style="{
+      opacity: signals[index - 1] ? 1 : 0
+    }"
+    :direction="index === 1 ? 'left' : 'right'" 
+  />
   </div>
-  <!-- <button style="color: white;" @click="toggleTrip">trip</button>
-  <button style="color: white;" @click="toggleSpeedometerMode">{{speedometerMode}}</button> -->
+
 </template>
 
 <script setup lang="ts">
