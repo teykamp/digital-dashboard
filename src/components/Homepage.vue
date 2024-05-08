@@ -45,7 +45,7 @@ onMounted(() => {
     @load="onLoad()"
     :height="700"
     :width="700"
-    :filePath="['src\\assets\\3d\\s2k.obj', 'src\\assets\\3d\\nissan.obj']"
+    :filePath="['src\\assets\\3d\\s2k.obj']"
     :backgroundAlpha="0"
     :rotation="rotation"
     :controlsOptions="{
@@ -54,6 +54,23 @@ onMounted(() => {
         enableRotate: true,
       }"
     :scale="[{ x: 2, y: 2, z: 2 }, { x: 0.3, y: 0.3, z: 0.3 }]"
+    @mousemove="onMouseMove"
+  ></vue3dLoader>
+
+  <vue3dLoader
+    @load="onLoad()"
+    :height="700"
+    :width="700"
+    :filePath="['src\\assets\\3d\\nissan.obj']"
+    :backgroundAlpha="0"
+    :rotation="rotation"
+    :controlsOptions="{
+        enablePan: false,
+        enableZoom: true,
+        enableRotate: true,
+      }"
+    :scale="[{ x: 2, y: 2, z: 2 }, { x: 0.3, y: 0.3, z: 0.3 }]"
+    @mousemove="onMouseMove"
   ></vue3dLoader>
 </template>
 
@@ -72,6 +89,7 @@ rotation.value = [{
   z: 0,
 }]
 
+
 const onLoad = () => {
   rotate()
 }
@@ -79,6 +97,17 @@ const rotate = () => {
   requestAnimationFrame(rotate)
   for (const object of rotation.value) {
     object.y += 0.001
+  }
+}
+
+const object = ref(null);
+function onMouseMove(event: MouseEvent, intersected: any) {
+  if (object.value) {
+    (object.value as any).material.color.setStyle("#fff");
+  }
+  if (intersected) {
+    object.value = intersected.object;
+    (object.value as any).material.color.setStyle("#13ce66");
   }
 }
 </script>
