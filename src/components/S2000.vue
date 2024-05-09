@@ -4,12 +4,15 @@
       v-show="speedometerMode === 'kph'"
       src="../assets/S2000/ap1kph.svg" 
       alt="" 
-      height="400rem">
+      height="400rem"
+      rel="preload"
+    >
     <img 
       v-show="speedometerMode === 'mph'" 
       src="../assets/S2000/ap1mph.svg" 
       alt="" 
       height="400rem"
+      rel="preload"
     >
   </div>
 

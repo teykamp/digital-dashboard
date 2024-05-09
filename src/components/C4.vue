@@ -1,8 +1,20 @@
 <template>
   <div style="margin-top: 250px;">
     <div style="position: relative;">
-      <img v-show="speedometerMode === 'kph'" src="../assets/C4/c4eu.svg" alt="" height="400rem">
-      <img v-show="speedometerMode === 'mph'" src="../assets/C4/c4us.svg" alt="" height="400rem">
+      <img 
+        v-show="speedometerMode === 'mph'" 
+        src="../assets/C4/c4us.svg"
+        alt="" 
+        height="400rem" 
+        rel="preload"
+      >
+      <img 
+        v-show="speedometerMode === 'kph'" 
+        src="../assets/C4/c4eu.svg" 
+        alt="" 
+        height="400rem"
+        rel="preload"
+      >
       <div :style="{
         position: 'absolute',
         height: '270px',
