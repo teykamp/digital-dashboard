@@ -45,7 +45,7 @@ onMounted(() => {
     @load="onLoad()"
     :height="700"
     :width="700"
-    :filePath="['src\\assets\\3d\\s2k.obj']"
+    :filePath="['src\\assets\\3d\\s2k_solid.obj']"
     :backgroundAlpha="0"
     :rotation="rotation"
     :controlsOptions="{
@@ -55,6 +55,7 @@ onMounted(() => {
       }"
     :scale="[{ x: 2, y: 2, z: 2 }, { x: 0.3, y: 0.3, z: 0.3 }]"
     @mousemove="onMouseMove"
+    :plyMaterial="'MeshBasicMaterial'"
   ></vue3dLoader>
 
   <vue3dLoader
