@@ -1,5 +1,17 @@
 <template>
   <div style="position: relative;">
+    <div>
+      <img 
+        src="../assets/N300ZX/n300zxus.svg"
+        alt="" 
+        height="400rem" 
+      >
+      <img 
+        src="../assets/N300ZX/n300zxeu.svg" 
+        alt="" 
+        height="400rem"
+      >
+    </div>
     <div
       v-for="index in TACHOMETER_SEGMENTS"
       :style="{
@@ -60,3 +72,11 @@ const tachometerHeight = [
   [],
 ]
 </script>
+
+<style>
+img {
+  position: relative;
+  top: -100px;
+  z-index: 1;
+}
+</style>
