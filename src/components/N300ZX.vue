@@ -1,55 +1,61 @@
 <template>
   <div style="position: relative;">
     <div>
-      <img 
+      <!-- <img 
         src="../assets/N300ZX/n300zxus.svg"
         alt="" 
         height="400rem" 
-      >
+      > -->
       <img 
         src="../assets/N300ZX/n300zxeu.svg" 
         alt="" 
         height="400rem"
       >
     </div>
-    <div
-      v-for="index in TACHOMETER_SEGMENTS"
-      :style="{
-        position: 'absolute',
-        height: `${tachometerHeight[0][index] + 10}px`,
-        width: '10px',
-        background: index === computeRpmIndexes ? 'red' : 'green',
-        left: `${index * 15}px`,
-        bottom: 0,
-      }"
-    >
-    </div>
-    <div v-if="rpm > 5000">
       <div
         v-for="index in TACHOMETER_SEGMENTS"
         :style="{
           position: 'absolute',
-          height: `${(tachometerHeight[0][index] - 15) * 1.5 + 30}px`,
-          width: '10px',
-          background: index === computeRpmIndexes ? 'red' : 'green',
-          left: `${index * 15}px`,
-          bottom: 0,
+          height: `${tachometerHeight[0][index] + 10}px`,
+          width: '5px',
+          background: index === computeRpmIndexes ? 'red' : '#159951',
+          left: `${index * 10 + 330}px`,
+          bottom: '240px',
+          boxShadow: '0 0 5px #159951',
+
         }"
       >
       </div>
-    </div>
-    <div v-if="rpm > 6500">
-      <div
-        v-for="index in TACHOMETER_SEGMENTS"
-        :style="{
-          position: 'absolute',
-          height: `${(tachometerHeight[0][index] - 20) * 3 + 30}px`,
-          width: '10px',
-          background: index === computeRpmIndexes ? 'red' : 'green',
-          left: `${index * 15}px`,
-          bottom: 0,
-        }"
-      >
+      <div v-show="rpm > 4000">
+        <div
+          v-for="index in TACHOMETER_SEGMENTS"
+          :style="{
+            position: 'absolute',
+            height: `${tachometerHeight[1][index] + 10}px`,
+            width: '5px',
+            background: index === computeRpmIndexes ? 'red' : '#159951',
+            left: `${index * 10 + 330}px`,
+            bottom: `${tachometerHeight[0][index] + 10 + 240 + 1}px`,
+            boxShadow: '0 0 5px #159951',
+        
+          }"
+        >
+        </div>
+      <div v-show="rpm > 6000">
+        <div
+          v-for="index in TACHOMETER_SEGMENTS"
+          :style="{
+            position: 'absolute',
+            height: `${tachometerHeight[2][index]}px`,
+            width: '5px',
+            background: index === computeRpmIndexes ? 'red' : '#159951',
+            left: `${index * 10 + 330}px`,
+            bottom: `${tachometerHeight[0][index] + 10 + 240 + 1 + tachometerHeight[1][index] + 10 + 1}px`,
+            boxShadow: index === computeRpmIndexes ? '0 0 5px red' : '0 0 5px #159951',
+        
+          }"
+        >
+        </div>
       </div>
     </div>
   </div>
@@ -62,14 +68,14 @@ import useEngineController from '../composables/useEngineController'
 const TACHOMETER_SEGMENTS = 38
 const MAX_TACHOMETER = 8000
 
-const { speed, rpm, gear } = useEngineController()
+const { speed, rpm } = useEngineController()
 
 const computeRpmIndexes = computed(() => Math.round(Math.min(rpm.value / MAX_TACHOMETER, 1) * TACHOMETER_SEGMENTS))
 
 const tachometerHeight = [
-  [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 53, 54, 55, 56, 57, 58, 59, 60, 60, 60, 59, 58, 57, 56, 55, 54, 53, 52],
-  [],
-  [],
+  [0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 5, 4, 4, 3, 3],
+  [0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 23, 24, 25, 26, 27, 27, 28, 28, 29, 28, 28, 27, 26],
+  [1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 18, 22, 24, 26, 30, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40, 38, 35],
 ]
 </script>
 
@@ -77,6 +83,6 @@ const tachometerHeight = [
 img {
   position: relative;
   top: -100px;
-  z-index: 1;
+  z-index: 0;
 }
 </style>
