@@ -1,17 +1,44 @@
 <template>
   <div style="position: relative;">
     <div>
-      <!-- <img 
+      <img
+        v-show="speedometerMode === 'mph'" 
         src="../assets/N300ZX/n300zxus.svg"
         alt="" 
         height="400rem" 
-      > -->
-      <img 
+      >
+      <img
+        v-show="speedometerMode === 'kph'" 
         src="../assets/N300ZX/n300zxeu.svg" 
         alt="" 
         height="400rem"
       >
     </div>
+
+      <p :style="{
+        position: 'absolute',
+        'font-family': 'DSEG7-Classic-MINI',
+        'font-weight': 'bold',
+        color: '#159951',
+        fontSize: '45px',
+        transform: 'skew(-20deg)',
+        bottom: '338px',
+        left: '375px',
+        textAlign: 'right',
+        width: '140px',
+      }">{{ Math.round(computedSpeed) }}</p>
+      <p :style="{
+        position: 'absolute',
+        'font-family': 'DSEG7-Classic-MINI',
+        'font-weight': 'bold',
+        color: '#159951',
+        fontSize: '25px',
+        transform: 'skew(-20deg)',
+        bottom: '280px',
+        left: '255px',
+        textAlign: 'right',
+        width: '140px',
+      }">{{ Math.round(rpm / 100) }}</p>
     <div
       v-for="index in TACHOMETER_SEGMENTS"
       :style="{
@@ -100,8 +127,17 @@
 </template>
 
 <script setup lang='ts'>
-import { computed } from 'vue'
+import { computed, ComputedRef } from 'vue'
 import useEngineController from '../composables/useEngineController'
+import { useDashButtons } from '../composables/useDashButtons'
+import useUnitComputation from '../composables/useUnitComputation'
+
+const { speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
+  {
+    keyCode: 'KeyU',
+    action: () => toggleSpeedometerMode()
+  }
+])
 
 const TACHOMETER_SEGMENTS = 39
 const MAX_TACHOMETER = 7000
@@ -113,6 +149,7 @@ const computeRpmIndexes = computed(() => {
   return Math.min(Math.round(Math.min((rpm.value - 5000) / (MAX_TACHOMETER - 5000), 1) * 4) + 35, TACHOMETER_SEGMENTS)
 })
 
+const computedSpeed = useUnitComputation(speed, speedometerMode) as ComputedRef<number>
 
 const tachometerHeight = [
   [0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 5, 4, 4, 3, 3, 3],
