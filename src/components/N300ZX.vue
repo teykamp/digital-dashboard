@@ -5,14 +5,35 @@
         v-show="speedometerMode === 'mph'" 
         src="../assets/N300ZX/n300zxus.svg"
         alt="" 
-        height="400rem" 
+        height="400rem"
+        rel="preload"
       >
       <img
         v-show="speedometerMode === 'kph'" 
         src="../assets/N300ZX/n300zxeu.svg" 
         alt="" 
         height="400rem"
+        rel="preload"
       >
+      <img
+        v-show="signals[0]" 
+        src="../assets/N300ZX/left.svg" 
+        alt="" 
+        height="20rem"
+      >
+      <img
+        v-show="signals[1]" 
+        src="../assets/N300ZX/right.svg" 
+        alt="" 
+        height="20rem"
+      >
+      <img
+        v-show="showHighBeams" 
+        src="../assets/N300ZX/highbeam.svg" 
+        alt="" 
+        height="20rem"
+      >
+      
     </div>
 
       <p :style="{
@@ -127,7 +148,7 @@
 </template>
 
 <script setup lang='ts'>
-import { computed, ComputedRef } from 'vue'
+import { computed, ComputedRef, ref } from 'vue'
 import useEngineController from '../composables/useEngineController'
 import { useDashButtons } from '../composables/useDashButtons'
 import useUnitComputation from '../composables/useUnitComputation'
@@ -136,8 +157,14 @@ const { speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
   {
     keyCode: 'KeyU',
     action: () => toggleSpeedometerMode()
+  },
+  {
+    keyCode: 'KeyB',
+    action: () => showHighBeams.value = !showHighBeams.value
   }
 ])
+
+const showHighBeams = ref(false)
 
 const TACHOMETER_SEGMENTS = 39
 const MAX_TACHOMETER = 7000
