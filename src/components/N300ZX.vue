@@ -12,70 +12,87 @@
         height="400rem"
       >
     </div>
+    <div
+      v-for="index in TACHOMETER_SEGMENTS"
+      :style="{
+        position: 'absolute',
+        height: '5px',
+        width: '5px',
+        background: '#159951',
+        left: `${index * 10 + 327}px`,
+        bottom: '230px',
+        boxShadow: '0 0 5px #159951',
+        opacity: [1, 6, 11, 16, 21, 27, 31, 35, 37, 39].includes(index) ? 1 : 0,
+
+      }"
+    ></div>
+    <div
+      v-for="index in TACHOMETER_SEGMENTS"
+      :style="{
+        position: 'absolute',
+        height: `${tachometerHeight[0][index] + 10}px`,
+        width: '5px',
+        background: index === computeRpmIndexes ? 'red' : '#159951',
+        left: `${index * 10 + 327}px`,
+        bottom: '240px',
+        boxShadow: '0 0 5px #159951',
+
+      }"
+    ></div>
+    <div v-show="rpm > 4000">
       <div
         v-for="index in TACHOMETER_SEGMENTS"
         :style="{
           position: 'absolute',
-          height: `${tachometerHeight[0][index] + 10}px`,
+          height: `${tachometerHeight[1][index] + 10}px`,
           width: '5px',
           background: index === computeRpmIndexes ? 'red' : '#159951',
-          left: `${index * 10 + 330}px`,
-          bottom: '240px',
+          left: `${index * 10 + 327}px`,
+          bottom: `${tachometerHeight[0][index] + 10 + 240 + 1}px`,
           boxShadow: '0 0 5px #159951',
-
+      
         }"
-      >
-      </div>
-      <div v-show="rpm > 4000">
-        <div
-          v-for="index in TACHOMETER_SEGMENTS"
-          :style="{
-            position: 'absolute',
-            height: `${tachometerHeight[1][index] + 10}px`,
-            width: '5px',
-            background: index === computeRpmIndexes ? 'red' : '#159951',
-            left: `${index * 10 + 330}px`,
-            bottom: `${tachometerHeight[0][index] + 10 + 240 + 1}px`,
-            boxShadow: '0 0 5px #159951',
-        
-          }"
-        >
-        </div>
-      <div v-show="rpm > 6000">
-        <div
-          v-for="index in TACHOMETER_SEGMENTS"
-          :style="{
-            position: 'absolute',
-            height: `${tachometerHeight[2][index]}px`,
-            width: '5px',
-            background: index === computeRpmIndexes ? 'red' : '#159951',
-            left: `${index * 10 + 330}px`,
-            bottom: `${tachometerHeight[0][index] + 10 + 240 + 1 + tachometerHeight[1][index] + 10 + 1}px`,
-            boxShadow: index === computeRpmIndexes ? '0 0 5px red' : '0 0 5px #159951',
-        
-          }"
-        >
-        </div>
-      </div>
+      ></div>
+    </div>
+    <div v-show="rpm > 6000">
+      <div
+        v-for="index in TACHOMETER_SEGMENTS"
+        :style="{
+          position: 'absolute',
+          height: `${tachometerHeight[2][index]}px`,
+          width: '5px',
+          background: index === computeRpmIndexes ? 'red' : '#159951',
+          left: `${index * 10 + 327}px`,
+          bottom: `${tachometerHeight[0][index] + 10 + 240 + 1 + tachometerHeight[1][index] + 10 + 1}px`,
+          boxShadow: index === computeRpmIndexes ? '0 0 5px red' : '0 0 5px #159951',
+      
+        }"
+      ></div>
     </div>
   </div>
+  {{ computeRpmIndexes }}
+  {{ Math.round(rpm) }}
 </template>
 
 <script setup lang='ts'>
 import { computed } from 'vue'
 import useEngineController from '../composables/useEngineController'
 
-const TACHOMETER_SEGMENTS = 38
-const MAX_TACHOMETER = 8000
-
+const TACHOMETER_SEGMENTS = 39
+const MAX_TACHOMETER = 7000
 const { speed, rpm } = useEngineController()
 
-const computeRpmIndexes = computed(() => Math.round(Math.min(rpm.value / MAX_TACHOMETER, 1) * TACHOMETER_SEGMENTS))
+const computeRpmIndexes = computed(() => {
+  if (rpm.value < 3000) return Math.round(Math.min((rpm.value - 500) / (3000 - 500), 1) * 27)
+  if (rpm.value < 5000) return Math.round(Math.min((rpm.value - 3000) / (5000 - 3000), 1) * 8) + 27
+  return Math.min(Math.round(Math.min((rpm.value - 5000) / (MAX_TACHOMETER - 5000), 1) * 4) + 35, TACHOMETER_SEGMENTS)
+})
+
 
 const tachometerHeight = [
-  [0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 5, 4, 4, 3, 3],
-  [0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 23, 24, 25, 26, 27, 27, 28, 28, 29, 28, 28, 27, 26],
-  [1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 18, 22, 24, 26, 30, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40, 38, 35],
+  [0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 5, 4, 4, 3, 3, 3],
+  [0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 23, 24, 25, 26, 27, 27, 28, 28, 29, 28, 28, 27, 26, 26],
+  [1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 18, 22, 24, 26, 30, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40, 38, 35, 32],
 ]
 </script>
 
