@@ -39,7 +39,7 @@
 
       }"
     ></div>
-    <div v-show="rpm > 2000">
+    <div v-show="rpm > 1500">
       <div
         v-for="index in TACHOMETER_SEGMENTS"
         :style="{
@@ -54,7 +54,7 @@
         }"
       ></div>
     </div>
-    <div v-show="rpm > 4000">
+    <div v-show="rpm > 2500">
       <div
         v-for="index in TACHOMETER_SEGMENTS"
         :style="{
@@ -64,6 +64,34 @@
           background: index === computeRpmIndexes ? 'red' : '#159951',
           left: `${index * 10 + 327}px`,
           bottom: `${tachometerHeight[0][index] + 10 + 235 + 1 + tachometerHeight[1][index] + 10 + 1}px`,
+          boxShadow: index === computeRpmIndexes ? '0 0 5px red' : '0 0 5px #159951',
+        }"
+      ></div>
+    </div>
+    <div v-show="rpm > 3500">
+      <div
+        v-for="index in TACHOMETER_SEGMENTS"
+        :style="{
+          position: 'absolute',
+          height: `${tachometerHeight[3][index]}px`,
+          width: '5px',
+          background: index === computeRpmIndexes ? 'red' : '#159951',
+          left: `${index * 10 + 327}px`,
+          bottom: `${tachometerHeight[0][index] + 10 + 235 + 1 + tachometerHeight[1][index] + 10 + 1 + tachometerHeight[2][index] + 1}px`,
+          boxShadow: index === computeRpmIndexes ? '0 0 5px red' : '0 0 5px #159951',
+        }"
+      ></div>
+    </div>
+    <div v-show="rpm > 4500">
+      <div
+        v-for="index in TACHOMETER_SEGMENTS"
+        :style="{
+          position: 'absolute',
+          height: `${tachometerHeight[4][index]}px`,
+          width: '5px',
+          background: index === computeRpmIndexes ? 'red' : '#159951',
+          left: `${index * 10 + 327}px`,
+          bottom: `${tachometerHeight[0][index] + 10 + 235 + 1 + tachometerHeight[1][index] + 10 + 1 + tachometerHeight[2][index] + 1 + tachometerHeight[3][index] + 1}px`,
           boxShadow: index === computeRpmIndexes ? '0 0 5px red' : '0 0 5px #159951',
         }"
       ></div>
@@ -89,9 +117,9 @@ const computeRpmIndexes = computed(() => {
 const tachometerHeight = [
   [0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 5, 4, 4, 3, 3, 3],
   [0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 23, 24, 25, 26, 27, 27, 28, 28, 29, 28, 28, 27, 26, 26],
-  [1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 18, 22, 24, 26, 30, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40, 38, 35, 32],
-  [1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 18, 22, 24, 26, 30, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40, 38, 35, 32],
-  [1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 18, 22, 24, 26, 30, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40, 38, 35, 32],
+  [1, 1, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 6, 8, 8, 10, 10, 12, 14, 14, 16, 16, 18, 19, 20, 21, 21, 22, 23, 24, 25, 24, 23, 23, 22, 21, 19, 18, 16],
+  [2, 2, 2, 2, 2, 2, 3, 3, 4, 3, 5, 6, 5, 5, 5, 6, 7, 8, 9, 9, 10, 11, 11, 12, 13, 13, 13, 15, 15, 15, 15, 16, 15, 15, 15, 15, 15, 15, 15, 15],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 3, 4, 5, 5, 7, 7, 9, 9, 9, 8, 9, 9, 10, 10, 11, 9, 10, 10, 10, 10, 10, 10, 10, 9],
 ]
 </script>
 
