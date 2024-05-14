@@ -20,7 +20,7 @@
         width: '5px',
         background: '#159951',
         left: `${index * 10 + 327}px`,
-        bottom: '230px',
+        bottom: '225px',
         boxShadow: '0 0 5px #159951',
         opacity: [1, 6, 11, 16, 21, 27, 31, 35, 37, 39].includes(index) ? 1 : 0,
 
@@ -34,12 +34,12 @@
         width: '5px',
         background: index === computeRpmIndexes ? 'red' : '#159951',
         left: `${index * 10 + 327}px`,
-        bottom: '240px',
+        bottom: '235px',
         boxShadow: '0 0 5px #159951',
 
       }"
     ></div>
-    <div v-show="rpm > 4000">
+    <div v-show="rpm > 2000">
       <div
         v-for="index in TACHOMETER_SEGMENTS"
         :style="{
@@ -48,13 +48,13 @@
           width: '5px',
           background: index === computeRpmIndexes ? 'red' : '#159951',
           left: `${index * 10 + 327}px`,
-          bottom: `${tachometerHeight[0][index] + 10 + 240 + 1}px`,
+          bottom: `${tachometerHeight[0][index] + 10 + 235 + 1}px`,
           boxShadow: '0 0 5px #159951',
       
         }"
       ></div>
     </div>
-    <div v-show="rpm > 6000">
+    <div v-show="rpm > 4000">
       <div
         v-for="index in TACHOMETER_SEGMENTS"
         :style="{
@@ -63,15 +63,12 @@
           width: '5px',
           background: index === computeRpmIndexes ? 'red' : '#159951',
           left: `${index * 10 + 327}px`,
-          bottom: `${tachometerHeight[0][index] + 10 + 240 + 1 + tachometerHeight[1][index] + 10 + 1}px`,
+          bottom: `${tachometerHeight[0][index] + 10 + 235 + 1 + tachometerHeight[1][index] + 10 + 1}px`,
           boxShadow: index === computeRpmIndexes ? '0 0 5px red' : '0 0 5px #159951',
-      
         }"
       ></div>
     </div>
   </div>
-  {{ computeRpmIndexes }}
-  {{ Math.round(rpm) }}
 </template>
 
 <script setup lang='ts'>
@@ -92,6 +89,8 @@ const computeRpmIndexes = computed(() => {
 const tachometerHeight = [
   [0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 5, 4, 4, 3, 3, 3],
   [0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 23, 24, 25, 26, 27, 27, 28, 28, 29, 28, 28, 27, 26, 26],
+  [1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 18, 22, 24, 26, 30, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40, 38, 35, 32],
+  [1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 18, 22, 24, 26, 30, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40, 38, 35, 32],
   [1, 1, 2, 2, 2, 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 18, 22, 24, 26, 30, 33, 35, 37, 39, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40, 38, 35, 32],
 ]
 </script>
