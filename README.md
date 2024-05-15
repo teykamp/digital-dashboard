@@ -3,8 +3,8 @@ Animations for car gauge clusters
 
 ## List of cars:
 
-- 3rd gen Trans Am
+- 3rd Gen Trans Am
 - C4 Corvette ✔️
 - Honda S2000 ✔️
 - Buick Reatta
-- Nissan 300ZX
+- Nissan 300ZX ✔️
