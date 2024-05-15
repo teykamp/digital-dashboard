@@ -1,4 +1,31 @@
 <template>
+  <div style="position:absolute;">
+    <img style="position:relative; z-index: 5; left: 803px; top: -31px;"
+        v-show="signals[1]" 
+        src="../assets/N300ZX/right.svg" 
+        alt="" 
+        height="20rem"
+      >
+  </div>
+
+  <div style="position:absolute;">
+  <img style="position:relative; z-index: 5; left: 248px; top: -33px;"
+        v-show="signals[0]" 
+        src="../assets/N300ZX/left.svg" 
+        alt="" 
+        height="20rem"
+      >
+    </div>
+
+    <div style="position:absolute;">
+    <img style="position:relative; z-index: 5; left: 650px; top: -90px;"
+        v-show="showHighBeams" 
+        src="../assets/N300ZX/highbeam.svg" 
+        alt="" 
+        height="20rem"
+      >
+    </div>
+
   <div style="position: relative;">
     <div>
       <img
@@ -15,25 +42,6 @@
         height="400rem"
         rel="preload"
       >
-      <img
-        v-show="signals[0]" 
-        src="../assets/N300ZX/left.svg" 
-        alt="" 
-        height="20rem"
-      >
-      <img
-        v-show="signals[1]" 
-        src="../assets/N300ZX/right.svg" 
-        alt="" 
-        height="20rem"
-      >
-      <img
-        v-show="showHighBeams" 
-        src="../assets/N300ZX/highbeam.svg" 
-        alt="" 
-        height="20rem"
-      >
-      
     </div>
 
       <p :style="{
