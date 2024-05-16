@@ -17,13 +17,18 @@
       >
     
     </div>
+
+    <a href="https://github.com/teykamp/digital-dashboard">
+    <h2 style="position: relative; font-family: 'Courier New', Courier, monospace; color: #414141;">by teykamp and shotgunfacelift on github</h2>
+    </a>
+    
   </div>
 </template>
 
 <script setup lang="ts">
-import N300ZX from '../assets/3d/anims/300zxgreen.gif'
-import C4 from '../assets/3d/anims/c4green.gif'
-import S2000 from '../assets/3d/anims/s2kgreen.gif'
+import N300ZX from '../assets/3d/anims/300zxorange.gif'
+import C4 from '../assets/3d/anims/c4orange.gif'
+import S2000 from '../assets/3d/anims/s2korange.gif'
 
 import N300ZXLogo from '../assets/logos/300zxlogo.svg'
 import C4Logo from '../assets/logos/c4logo.svg'
@@ -53,7 +58,7 @@ const carModels = ref([
 
 <style>
 .car:hover {
-  filter: hue-rotate(260deg);
+  filter: hue-rotate(-260deg);
 }
 
 .logo {

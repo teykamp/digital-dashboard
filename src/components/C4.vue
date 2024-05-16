@@ -249,7 +249,7 @@ const computeCoolantTemp = computed(() => speedometerMode.value === 'mph' ? '198
 const computeMPG = computed(() => speedometerMode.value === 'mph' ? '12.2' : '19.3')
 </script>
 
-<style>
+<style scoped>
 img {
   position: relative;
   top: -100px;
