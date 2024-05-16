@@ -1,20 +1,22 @@
 <template>
-  <div 
-    v-for="carModel in carModels" 
-    @click="$emit('selectCar', carModel.name)"
-    style="display: flex;"
-  >
-    <img 
-      style="max-width: 400px;"
-      class="car"
-      :src="carModel.model"
+  <div style="margin-top: 10rem;">
+    <div 
+      v-for="carModel in carModels" 
+      @click="$emit('selectCar', carModel.name)"
+      style="display: flex;"
     >
-    <img 
-      style="max-width: 400px;"
-      class="logo"
-      :src="carModel.logo"
-    >
-
+      <img 
+        style="max-width: 400px;"
+        class="car"
+        :src="carModel.model"
+      >
+      <img 
+        style="max-width: 400px;"
+        class="logo"
+        :src="carModel.logo"
+      >
+    
+    </div>
   </div>
 </template>
 
