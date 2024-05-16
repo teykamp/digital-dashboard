@@ -169,7 +169,6 @@ const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOM
 
 <style>
 img {
-  position: relative;
   top: -200px;
   z-index: 1;
 }
