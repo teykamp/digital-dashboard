@@ -13,6 +13,7 @@ import 'dseg/css/dseg.css' // globally
 import S2000 from './components/S2000.vue'
 import C4 from './components/C4.vue'
 import N300ZX from './components/N300ZX.vue'
+import Firebird from './components/Firebird.vue'
 import Homepage from './components/Homepage.vue'
 import { ref, markRaw } from 'vue'
 
@@ -26,6 +27,9 @@ const selectCar = (selectedCar?: string) => {
       break
     case ('N300ZX'): 
       currentCar.value = markRaw(N300ZX)
+      break
+    case ('Firebird'): 
+      currentCar.value = markRaw(Firebird)
       break
     default: 
       currentCar.value = markRaw(Homepage)

@@ -29,10 +29,12 @@
 import N300ZX from '../assets/3d/anims/300zxorange.gif'
 import C4 from '../assets/3d/anims/c4orange.gif'
 import S2000 from '../assets/3d/anims/s2korange.gif'
+import Firebird from '../assets/3d/anims/firebirdorange.gif'
 
 import N300ZXLogo from '../assets/logos/300zxlogo.svg'
 import C4Logo from '../assets/logos/c4logo.svg'
 import S2000Logo from '../assets/logos/s2klogo.svg'
+import FirebirdLogo from '../assets/logos/firebirdlogo.svg'
 
 import { ref } from 'vue'
 
@@ -51,6 +53,11 @@ const carModels = ref([
     name: 'N300ZX',
     model: N300ZX,
     logo: N300ZXLogo,
+  },
+  {
+    name: 'Firebird',
+    model: Firebird,
+    logo: FirebirdLogo,
   },
 ])
 
