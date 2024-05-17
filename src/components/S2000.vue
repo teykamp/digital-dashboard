@@ -167,7 +167,7 @@ const TACHOMETER_SEGMENTS = 45
 const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOMETER_SEGMENTS))
 </script>
 
-<style>
+<style scoped>
 img {
   top: -200px;
   z-index: 1;
