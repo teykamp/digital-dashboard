@@ -7,4 +7,3 @@ Animations for car gauge clusters
 - Honda S2000 ✔️
 - Nissan 300ZX ✔️
 - Trans Am GTA
-- 
