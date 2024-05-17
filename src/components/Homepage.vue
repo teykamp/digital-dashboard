@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 10rem;">
+  <div style="margin-top: 9rem;">
     <div 
       v-for="carModel in carModels" 
       @click="$emit('selectCar', carModel.name)"
@@ -19,7 +19,7 @@
     </div>
 
     <a href="https://github.com/teykamp/digital-dashboard">
-    <h2 style="position: relative; font-family: 'Courier New', Courier, monospace; color: #414141;">by teykamp and shotgunfacelift on github</h2>
+      <h3 style="position: relative; font-family: 'Courier New', Courier, monospace; color: #414141;">by teykamp and shotgunfacelift on github</h3>
     </a>
     
   </div>

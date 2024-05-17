@@ -1,4 +1,9 @@
 <template>
+  <button 
+    v-if="currentCar.__name !== 'Homepage'"
+    @click="selectCar()"
+    style="position: absolute; top: 10px; left: 10px;"
+  >Back</button>
   <component :is="currentCar" @select-car="selectCar"></component>
 </template>
 
@@ -11,8 +16,7 @@ import N300ZX from './components/N300ZX.vue'
 import Homepage from './components/Homepage.vue'
 import { ref, markRaw } from 'vue'
 
-const selectCar = (selectedCar: string) => {
-  console.log(selectedCar)
+const selectCar = (selectedCar?: string) => {
   switch (selectedCar) {
     case ('S2000'): 
       currentCar.value = markRaw(S2000)
