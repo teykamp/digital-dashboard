@@ -44,6 +44,20 @@
       >
     </div>
 
+    <div style="position:absolute; top: 255px; left: 65px;">
+      <div style="margin-top: -16px; display: flex; justify-content: space-between; padding-left: 10px; padding-right: 10px;">
+        
+        <p :style="{
+          fontFamily: 'Courier New, Courier, monospace', 
+          fontStyle: 'normal',
+          fontWeight: 'bold',
+          transform: 'skew(5deg)',
+          letterSpacing: '8px',
+          color: useHexToRGBA('#8a8381', 0.9),
+        }">{{ Math.floor(computedOdometerValue[0]).toString().padStart(6, '0') }}</p>
+      </div>
+    </div>
+
       <p :style="{
         position: 'absolute',
         'font-family': 'DSEG7-Classic-MINI',
@@ -160,8 +174,11 @@ import { computed, ComputedRef, ref } from 'vue'
 import useEngineController from '../composables/useEngineController'
 import { useDashButtons } from '../composables/useDashButtons'
 import useUnitComputation from '../composables/useUnitComputation'
+import useTripComputer from '../composables/useTripComputer'
+import useHexToRGBA from '../functions/useHexToRGBA'
 
-const { speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
+
+const { trip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
   {
     keyCode: 'KeyU',
     action: () => toggleSpeedometerMode()
@@ -193,6 +210,9 @@ const tachometerHeight = [
   [2, 2, 2, 2, 2, 2, 3, 3, 4, 3, 5, 6, 5, 5, 5, 6, 7, 8, 9, 9, 10, 11, 11, 12, 13, 13, 13, 15, 15, 15, 15, 16, 15, 15, 15, 15, 15, 15, 15, 15],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 3, 4, 5, 5, 7, 7, 9, 9, 9, 8, 9, 9, 10, 10, 11, 9, 10, 10, 10, 10, 10, 10, 10, 9],
 ]
+
+const { odometerValue } = useTripComputer(speed, trip)
+const computedOdometerValue = useUnitComputation(odometerValue, speedometerMode) as ComputedRef<number[]>
 </script>
 
 <style>
