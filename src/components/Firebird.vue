@@ -1,19 +1,23 @@
 <template>
   <div>
-    <img 
+    <img style="z-index: 2;"
       v-show="speedometerMode === 'kph'"
       src="../assets/firebird/firebirdeu.svg" 
       alt="" 
       height="400rem"
       rel="preload"
     >
-    <img 
+    <img style="z-index: 2;"
       v-show="speedometerMode === 'mph'" 
       src="../assets/firebird/firebirdus.svg" 
       alt="" 
       height="400rem"
       rel="preload"
     >
+  </div>
+
+  <div style="position: absolute;">
+  <img style="top: -470px; left: 104px; z-index: 0;" src="../assets/firebird/back.svg" height="180rem">
   </div>
 
   <div style="position:absolute;">
@@ -102,7 +106,7 @@ const computeRpmIndexes = computed(() => Math.round((800 + rpm.value) / MAX_RPM 
 </script>
 
 <style scoped>
-img {
+/* img {
   z-index: 1;
-}
+} */
 </style>
