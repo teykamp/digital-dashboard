@@ -3,7 +3,7 @@ Animations for car gauge clusters
 
 ## List of cars:
 
-- C4 Corvette
 - Honda S2000
+- C4 Corvette
 - Nissan 300ZX
 - Trans Am GTA
