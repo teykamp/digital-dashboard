@@ -3,7 +3,7 @@
     <div 
       v-for="carModel in carModels" 
       @click="$emit('selectCar', carModel.name)"
-      style="display: flex;"
+      style="display: flex; cursor: pointer;"
     >
       <img 
         style="max-width: 400px;"
