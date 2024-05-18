@@ -189,9 +189,9 @@
     </div>
     <div style="position: relative;">
       <img v-show="rpm >= 2500" src="../assets/C4/upshift.svg"
-        style="position: absolute; height: 80px; left: 820px; top: -460px;">
+        style="position: absolute; height: 80px; left: 820px; top: -490px;">
       <img v-show="gear >= 4" src="../assets/C4/od.svg"
-        style="position: absolute; height: 25px; left: 993px; top: -315px;">
+        style="position: absolute; height: 25px; left: 993px; top: -350px;">
     </div>
     
     <div
