@@ -71,4 +71,8 @@ const carModels = ref([
 .logo {
   filter: invert(18%) sepia(62%) saturate(5%) hue-rotate(324deg) brightness(99%) contrast(83%);
 }
+
+html{
+  overflow: auto;
+}
 </style>
