@@ -43,5 +43,6 @@ const currentCar = ref<typeof Homepage>(markRaw(Homepage))
 <style>
 body{
   background-color: rgb(29, 29, 29);
+  overflow: hidden;
 }
 </style>
