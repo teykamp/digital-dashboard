@@ -1,4 +1,5 @@
 <template>
+  <div style="overflow: auto; max-height: 100vh; max-width: 100%;">
   <div style="margin-top: 9rem;">
     <div 
       v-for="carModel in carModels" 
@@ -23,6 +24,7 @@
     </a>
     
   </div>
+</div>
 </template>
 
 <script setup lang="ts">
