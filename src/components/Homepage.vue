@@ -18,6 +18,7 @@
     
     </div>
 
+    <h3 style="position: relative; font-family: 'Courier New', Courier, monospace; color: #414141;">space: accelerate | u: change units | up/down: shift | left/right: turn signals</h3>
     <a href="https://github.com/teykamp/digital-dashboard">
       <h3 style="position: relative; font-family: 'Courier New', Courier, monospace; color: #414141;">by teykamp and shotgunfacelift on github</h3>
     </a>
