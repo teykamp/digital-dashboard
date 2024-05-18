@@ -48,8 +48,8 @@
           rotate: `${index / 12 + Math.PI / 3.6 + 0.60}rad`,
           height: '95px',
           width: '4px',
-          background: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 3) ? '#DA4D3F' : '#E6A325') : '#a4e324',
-          boxShadow: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 3) ? '0 0 5px #DA4D3F' : '0 0 5px #E6A325') : '0 0 5px #289f2e',
+          background: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 5) ? '#DA4D3F' : '#E6A325') : '#a4e324',
+          boxShadow: index >= (TACHOMETER_SEGMENTS - 7) ? (index >= (TACHOMETER_SEGMENTS - 5) ? '0 0 5px #DA4D3F' : '0 0 5px #E6A325') : '0 0 5px #289f2e',
         }"
       ></div>
     </div>
@@ -66,6 +66,11 @@
     :direction="index === 1 ? 'left' : 'right'" 
   />
   </div>
+</div>
+
+<div style="position: relative;">
+  <img v-show="rpm >= 2500" src="../assets/firebird/upshift.svg"
+   style="position: absolute; height: 50px; left: 50px; top: -480px;">
 </div>
 </template>
 
@@ -112,7 +117,7 @@ const TACHOMETER_SEGMENTS = 24
 const computeRpmIndexes = computed(() => Math.round(rpm.value / MAX_RPM * TACHOMETER_SEGMENTS))
 </script>
 
-<style>
+<style scoped>
 img {
   z-index: 1;
 }
