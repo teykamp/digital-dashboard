@@ -37,12 +37,11 @@ const selectCar = (selectedCar?: string) => {
   }
 }
 
-const currentCar = ref<typeof Homepage | typeof S2000 | typeof C4 | typeof N300ZX>(markRaw(Homepage))
+const currentCar = ref<typeof Homepage>(markRaw(Homepage))
 </script>
 
 <style>
 body{
   background-color: rgb(29, 29, 29);
-  overflow: hidden;
 }
 </style>

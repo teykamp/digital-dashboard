@@ -1,5 +1,4 @@
 <template>
-  <div style="overflow: auto; max-height: 100vh; max-width: 100%;">
   <div style="margin-top: 9rem;">
     <div 
       v-for="carModel in carModels" 
@@ -22,9 +21,7 @@
     <a href="https://github.com/teykamp/digital-dashboard">
       <h3 style="position: relative; font-family: 'Courier New', Courier, monospace; color: #414141;">by teykamp and shotgunfacelift on github</h3>
     </a>
-    
   </div>
-</div>
 </template>
 
 <script setup lang="ts">
