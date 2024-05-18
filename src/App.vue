@@ -2,8 +2,8 @@
   <button 
     v-if="currentCar.__name !== 'Homepage'"
     @click="selectCar()"
-    style="position: absolute; top: 10px; left: 10px;"
-  >Back</button>
+    style="position: absolute; top: 10px; left: 10px; background-color: #292929; color:white; border-color: white;"
+  >Home</button>
   <component :is="currentCar" @select-car="selectCar"></component>
 </template>
 
