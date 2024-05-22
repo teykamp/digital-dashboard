@@ -82,23 +82,20 @@
 import { computed, ComputedRef } from 'vue'
 import TurnSignal from './TurnSignal.vue'
 import useEngineController from '../composables/useEngineController'
-import useTripComputer from '../composables/useTripComputer'
 import { useDashButtons } from '../composables/useDashButtons'
 import useUnitComputation from '../composables/useUnitComputation'
 
 const { speed, rpm, MAX_RPM } = useEngineController()
 
-const { trip, speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
+const { speedometerMode, toggleSpeedometerMode, signals } = useDashButtons([
   {
     keyCode: 'KeyU',
     action: () => toggleSpeedometerMode()
   }
 ])
 
-const { odometerValue } = useTripComputer(speed, trip)
 
 const computedSpeed = useUnitComputation(speed, speedometerMode) as ComputedRef<number>
-const computedOdometerValue = useUnitComputation(odometerValue, speedometerMode) as ComputedRef<number[]>
 
 const TACHOMETER_SEGMENTS = 24
 
